@@ -1,0 +1,133 @@
+.quote-page-title {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .quote-page-error {
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .quote-page-add-btn {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .quote-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  .quote-table th,
+  .quote-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .quote-table th {
+    background-color: #f4f4f4;
+    text-align: left;
+  }
+  
+  .quote-edit-btn,
+  .quote-delete-btn {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .quote-edit-btn {
+    background-color: #ffc107;
+    color: black;
+  }
+  
+  .quote-delete-btn {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .quote-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .quote-modal {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .quote-modal-title {
+    margin-top: 0;
+  }
+  
+  .quote-modal-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .quote-form-group {
+    margin-bottom: 10px;
+  }
+  
+  .quote-form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .quote-form-group textarea,
+  .quote-form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .quote-submit-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .quote-cancel-btn {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .quote-submit-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  

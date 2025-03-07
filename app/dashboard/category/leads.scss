@@ -1,0 +1,386 @@
+
+
+// .container {
+//   margin: 20px;
+// }
+
+// label,
+// h1 {
+//   font-family: "Poppins", sans-serif;
+//   font-weight: 600;
+//   font-style: normal;
+// }
+
+// .form-layout-leads {
+//   padding: 20px;
+//   background: #f9f9f9;
+//   border-radius: 8px;
+//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+// }
+
+// .card {
+//   transition: transform 0.2s;
+// }
+
+// .card:hover {
+//   transform: scale(1.02);
+// }
+
+// .input-dropdown {
+//   transition: border-color 0.2s;
+// }
+
+// .input-dropdown:focus {
+//   border-color: #007bff;
+//   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+// }
+
+// .custom-modal-overlay {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background-color: rgba(0, 0, 0, 0.5);
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   z-index: 1000;
+// }
+
+// .custom-modal {
+//   background: white;
+//   width: 90%;
+//   max-width: 500px;
+//   border-radius: 8px;
+//   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+//   overflow: hidden;
+//   animation: fadeIn 0.3s ease-out;
+// }
+
+// .custom-modal-header {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 16px;
+//   // border-bottom: 1px solid #ddd;
+// }
+
+// .custom-modal-header h2 {
+//   margin: 0;
+//   font-size: 1.25rem;
+// }
+
+// .close-button {
+//   background: none;
+//   border: none;
+//   font-size: 1.5rem;
+//   cursor: pointer;
+//   background-color: #BBBBBB;
+//   border-radius: 50%;
+//   color: white;
+// }
+
+// .d-flex {
+//   display: flex;
+
+// }
+
+// .d-flex .icosn {
+//   font-size: 12px;
+
+//   margin: 12px;
+//   background-color: #BBBBBB;
+//   border-radius: 50%;
+//   color: white;
+//   padding: 2px;
+// }
+// .d-flex .icosn h2{
+//   text-align: center;
+//   align-items: center;
+//   margin-top: 12px;
+// }
+// .p-button-info{
+// background-color: #BBBBBB;
+// border: #BBBBBB;
+// color: black;
+// }
+// .custom-modal-content {
+//   padding: 16px;
+// }
+
+
+// @keyframes fadeIn {
+//   from {
+//     opacity: 0;
+//     transform: scale(0.9);
+//   }
+
+//   to {
+//     opacity: 1;
+//     transform: scale(1);
+//   }
+// }
+// .p-button-success {
+//   background-color: #f9f9f9;
+//   color: black;
+//   font-weight: 100;
+//   border: 1px solid rgba(0, 0, 0, 0.274);
+// }
+// .p-button-success span {
+//   font-weight: 400;
+// }
+/* Container Styles */
+.container {
+  margin: 20px;
+}
+
+/* Typography Styles */
+label,
+h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Form Layout Styles */
+.form-layout-leads {
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Styles */
+.card {
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+/* Input and Dropdown Styles */
+.input-dropdown {
+  transition: border-color 0.2s;
+}
+
+.input-dropdown:focus,
+.p-inputtext:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Custom Modal Overlay Styles */
+.custom-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Custom Modal Styles */
+.custom-modal {
+  background: white;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Custom Modal Header Styles */
+.custom-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #ddd;
+}
+
+.custom-modal-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+/* Close Button Styles */
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background-color: #bbbbbb;
+  border-radius: 50%;
+  color: white;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Flexbox Utility Class */
+.d-flex {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Icon Styles */
+.d-flex .icosn {
+  font-size: 16px;
+  margin-right: 8px;
+  background-color: #bbbbbb;
+  border-radius: 50%;
+  color: white;
+  padding: 4px;
+}
+
+/* Button Styles */
+.p-button-info {
+  background-color: #bbbbbb;
+  border: #bbbbbb;
+  color: black;
+}
+
+.p-button-info:hover {
+  background-color: #a8a8a8;
+  border-color: #a8a8a8;
+  color: white;
+}
+
+.p-button-success {
+  background-color: transparent;
+  border: 1px solid #a8a8a8;
+  color: #000;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  border-radius: 12px;
+}
+
+.p-button, .p-dropdown{
+  border-radius: 12px;
+}
+
+.p-button-success:hover {
+  background-color: #15433d;
+}
+
+.custom-modal-content {
+  padding: 16px;
+}
+
+.p-button-help{
+  background: #27ae60;
+  border: 0px solid;
+}
+
+/* Keyframes for Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Table Styles */
+.datatable-responsive {
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: white;
+}
+
+.datatable-responsive .p-datatable-header {
+  padding: 8px;
+  background-color: #f4f4f4;
+  border-bottom: 1px solid #ddd;
+}
+
+.datatable-responsive .p-datatable-thead > tr > th {
+  background-color: #f9f9f9;
+  color: #333;
+  font-weight: bold;
+  text-align: left;
+}
+
+
+
+.datatable-responsive .p-datatable-tbody > tr > td {
+  padding: 12px;
+  color: #555;
+}
+
+/* Success and Error Text */
+.text-red-500 {
+  color: #e74c3c;
+}
+
+.text-green-500 {
+  color: #27ae60;
+}
+
+
+
+
+// button
+/* Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ccc;
+  transition: 0.4s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background: #4caf50; /* Match green color */
+}
+
+input:checked + .slider:before {
+  transform: translateX(14px);
+}
+
+

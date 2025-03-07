@@ -1,0 +1,199 @@
+// @import 'primeflex/primeflex.scss';
+// @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+// /* Add this to your global CSS file */
+// @import "~slick-carousel/slick/slick.css";
+// @import "~slick-carousel/slick/slick-theme.css";
+
+// @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+// .layout-main-container {
+//     display: flex;
+//     flex-direction: column;
+//     min-height: 100vh;
+//     justify-content: space-between;
+//     padding: 7rem 2rem 2rem 4rem;
+//     transition: margin-left .2s;;
+// }
+
+// .layout-main {
+//     flex: 1 1 auto;
+// }
+
+// @media (min-width: 992px) {
+//     .layout-main-container {
+//         margin-left: 300px;
+//     }
+// }
+
+// // @media screen and (min-width: 1960px) {
+// //     .layout-main, .landing-wrapper {
+// //         width: 1504px;
+// //         margin-left: auto !important;
+// //         margin-right: auto !important;
+// //     }
+// // }
+
+// @media (min-width: 992px) {
+//     .layout-wrapper {
+//         &.layout-overlay {
+//             .layout-main-container {
+//                 margin-left: 0;
+//                 padding-left: 2rem;
+//             }
+
+//             .layout-sidebar {
+//                 transform: translateX(-100%);
+//                 left: 0;
+//                 top: 0;
+//                 height: 100vh;
+//                 // border-top-left-radius: 0;
+//                 // border-bottom-left-radius: 0;
+//             }
+
+//             &.layout-overlay-active {
+//                 .layout-sidebar {
+//                     transform: translateX(0);
+//                 }
+//             }
+//         }
+
+//         &.layout-static {
+//             .layout-main-container {
+//                 margin-left: 300px;
+//             }
+
+//             &.layout-static-inactive {
+//                 .layout-sidebar {
+//                     transform: translateX(-100%);
+//                     left: 0;
+//                 }
+
+//                 // .layout-main-container {
+//                 //     margin-left: 0;
+//                 //     padding-left: 2rem;
+//                 // }
+//             }
+//         }
+
+//         .layout-mask {
+//             display: none;
+//         }
+//     }
+// }
+
+// @media (max-width: 991px) {
+//     .blocked-scroll {
+//         overflow: hidden;
+//     }
+
+//     .layout-wrapper {
+//         .layout-main-container {
+//             margin-left: 0;
+//             padding-left: 2rem;
+//         }
+
+//         .layout-sidebar {
+//             transform: translateX(-100%);
+//             left: 0;
+//             top: 0;
+//             height: 100vh;
+//             // border-top-left-radius: 0;
+//             // border-bottom-left-radius: 0;
+//         }
+
+//         .layout-mask {
+//             display: none;
+//             position: fixed;
+//             top: 0;
+//             left: 0;
+//             z-index: 998;
+//             width: 100%;
+//             height: 100%;
+//             background-color: var(--maskbg);
+//         }
+
+//         &.layout-mobile-active {
+//             .layout-sidebar {
+//                 transform: translateX(0);
+//             }
+
+//             .layout-mask {
+//                 display: block;
+//                 // animation: fadein $transitionDuration;
+//             }
+//         }
+//     }
+// }
+// // .layout-container {
+// //     display: flex;
+// //     height: 100vh; 
+// // }
+
+// // .layout-sidebar {
+// //     // width: 300px; 
+// //     transition: transform 0.3s ease;
+// //     transform: translateX(0); 
+// // }
+
+// // .layout-sidebar.hidden {
+// //     transform: translateX(-100%); 
+// // }
+
+// .layout-main-container {
+//     flex: 1; 
+//     display: flex;
+//     flex-direction: column;
+//     transition: margin-left 0.3s ease; 
+// }
+
+// .layout-main-container.sidebar-hidden {
+//     margin-left: 0; 
+// }
+
+// .layout-main {
+//     flex: 1; 
+// }
+// .layout-config-button {
+//     // display: block;
+//     position: fixed;
+//     width: 3rem;
+//     height: 3rem;
+//     line-height: 3rem;
+//     background: var(--primary-color);
+//     color: var(--primary-color-text);
+//     text-align: center;
+//     top: 50%;
+//     right: 0;
+//     margin-top: -1.5rem;
+//     border-top-left-radius: var(--border-radius);
+//     border-bottom-left-radius: var(--border-radius);
+//     border-top-right-radius: 0;
+//     border-bottom-right-radius: 0;
+//     transition: background-color var(--transition-duration);
+//     overflow: hidden;
+//     cursor: pointer;
+//     z-index: 999;
+//     box-shadow: -.25rem 0 1rem rgba(0,0,0,.15);
+
+
+//     &.config-link {
+//         font-size: 1rem;
+//         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+//         border: none;
+//       }
+//       .config-link:focus {
+//         outline: 0 none;
+//         outline-offset: 0;
+//         box-shadow: 0 0 0 1px var(--focus-ring);
+//       }
+
+//     i {
+//         font-size: 2rem;
+//         line-height: inherit;
+//         transform: rotate(0deg);
+//         transition: transform 1s;
+//     }
+
+//     &:hover {
+//         background: var(--primary-400);
+//     }
+// }
