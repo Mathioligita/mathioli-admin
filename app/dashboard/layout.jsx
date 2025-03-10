@@ -1,11 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Navbar from "../ui/dashboard/navbar/Navbar"; // Changed import path
+// Changed import path
 import Sidebar from "../ui/dashboard/sidebar/sidebar";
 import NotFound from "../ui/dashboard/notfound/page";
 import "../ui/dashboard/dashboard.scss";
 import "../App.css";
+import Navbar from "../ui/dashboard/navbar/Navbar";
 
 export default function Layout({ children }) {
   const [accessToken, setAccessToken] = useState(null);

@@ -1,36 +1,3 @@
-// 'use client';
-
-// import Link from 'next/link';
-// import { classNames } from 'primereact/utils';
-// import React, { useEffect, useState } from 'react';
-// import { Chip } from 'primereact/chip';
-// import "primereact/resources/themes/lara-light-cyan/theme.css";
-// import axiosInstance from '../../../../axiosConfig';
-// import "./navba.scss";
-
-// const Navbar = () => {
-
-//     return (
-//         <div className="layout-topbar">
-//             <Link href="/" className="layout-topbar-logo">
-//                 <span>Mathioli</span>
-//             </Link>
-
-//             <div className={classNames('layout-topbar-menu')}>
-//                 <Link href="/dashboard/profile">
-//                     <Chip
-//                         key="profile-chip"
-//                         label="Profile"
-//                         image={ "/killer.avif"}
-//                         className="profile-chip"
-//                     />
-//                 </Link>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Navbar;
 "use client";
 import Link from "next/link";
 import { classNames } from "primereact/utils";
@@ -44,7 +11,10 @@ import { useState } from "react";
 const Navbar = () => {
   const [query, setQuery] = useState("");
   return (
-    <div className="layout-topbar " style={{borderBottom:"1px solid #8080804f"}}>
+    <div
+      className="layout-topbar "
+      style={{ borderBottom: "1px solid #8080804f" }}
+    >
       <div className=""></div>
 
       <div className="d-flex align-items-center align-self-center w-100">
