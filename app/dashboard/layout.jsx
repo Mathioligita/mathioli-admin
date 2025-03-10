@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Navbar from "../ui/dashboard/Navbar/navbar";
+import Navbar from "../ui/dashboard/navbar/Navbar"; // Changed import path
 import Sidebar from "../ui/dashboard/sidebar/sidebar";
 import NotFound from "../ui/dashboard/notfound/page";
 import "../ui/dashboard/dashboard.scss";
@@ -23,19 +23,10 @@ export default function Layout({ children }) {
   }
 
   return (
-    // <div className="layout-container">
-    //   <Navbar isOpen={isOpen} toggleSidebar={toggleSidebar} />
-    //   <div className={`layout-sidebar`}>
-    //     <Sidebar isOpen={isOpen} />
-    //   </div>
-    //   <div className="layout-content-wrapper">
-    //     <div className="layout-content">{children}</div>
-    //   </div>
-    // </div>
     <div className="d-flex align-items-start">
       <Sidebar />
       <div className="w-100 sid-wd">
-        <Navbar  />
+        <Navbar />
         <div className="layout-body container">{children}</div>
       </div>
     </div>
