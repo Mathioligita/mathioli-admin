@@ -6,7 +6,7 @@ import Sidebar from "../ui/dashboard/sidebar/sidebar";
 import NotFound from "../ui/dashboard/notfound/page";
 import "../ui/dashboard/dashboard.scss";
 import "../App.css";
-import Navbar from "../ui/dashboard/navbar/Navbar";
+import Navbar from "../ui/dashboard/navbar/navbar";
 
 export default function Layout({ children }) {
   const [accessToken, setAccessToken] = useState(null);
