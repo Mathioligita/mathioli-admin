@@ -9,7 +9,7 @@ import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { Card, Col, Row } from "react-bootstrap";
-import {  } from "../../utlis";
+import { API_BASE_URL } from "../../utlis";
 import Swal from "sweetalert2";
 import { InputMask } from 'primereact/inputmask';
 

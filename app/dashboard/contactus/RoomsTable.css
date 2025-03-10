@@ -1,0 +1,186 @@
+/* General Styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  /* background-color: #ffffff; White background */
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); Subtle shadow for depth */
+  border-radius: 12px;
+}
+
+/* Heading Styles */
+h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #212529; /* Dark grey */
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Form and Input Styles */
+form {
+  margin-bottom: 20px;
+}
+
+form .form-control,
+form .form-select {
+  border-radius: 8px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle inset shadow */
+  transition: border-color 0.3s ease;
+}
+
+form .form-control:focus,
+form .form-select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); /* Blue focus glow */
+}
+
+form .btn {
+  border-radius: 8px;
+}
+
+/* Input Group Styles */
+.input-group .form-control {
+  border-right: none; /* Remove border between input and button */
+}
+
+.input-group .btn {
+  border-radius: 0 8px 8px 0; /* Round right corners */
+}
+
+.input-group .btn-outline-secondary {
+  color: #495057;
+  border-color: #ced4da;
+}
+
+.input-group .btn-outline-secondary:hover {
+  background-color: #ced4da;
+  color: #ffffff;
+}
+
+/* Table Styles */
+table {
+  margin-top: 20px;
+}
+
+.table-dark th {
+  background-color: #343a40; /* Dark grey */
+  color: #ffffff; /* White text */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f8f9fa; /* Very light grey */
+}
+
+.table-hover tbody tr:hover {
+  background-color: #e9ecef; /* Light grey for hover */
+}
+
+table td,
+table th {
+  vertical-align: middle; /* Vertically center-align text */
+  text-align: center; /* Horizontally center-align text */
+  padding: 12px;
+  font-size: 0.95rem;
+}
+
+/* Button Styles */
+.btn {
+  font-size: 1rem;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #b02a37;
+  border-color: #7f1d25;
+}
+
+.btn-outline-secondary {
+  color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: #ffffff;
+}
+
+.add-room-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.add-room-btn:hover {
+  background-color: #0056b3;
+  text-decoration: none;
+}
+
+/* Loader Styles */
+.text-center {
+  font-size: 1.2rem;
+  color: #6c757d; /* Muted grey */
+  margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .container {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  .btn {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+
+  .form-control,
+  .form-select {
+    font-size: 0.9rem;
+  }
+
+  table {
+    font-size: 0.85rem;
+  }
+}

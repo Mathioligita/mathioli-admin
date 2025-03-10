@@ -18,7 +18,7 @@
         color: var(--surface-900);
         font-size: 1.5rem;
         font-weight: 500;
-        // width: 300px;
+        width: 300px;
         border-radius: 12px;
   
         img {
@@ -65,7 +65,10 @@
     }
   
     .layout-menu-button {
-        margin-left: 2rem;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+
     }
   
     .layout-topbar-menu-button {
@@ -150,60 +153,37 @@
         }
     }
   }
-
-  .layout-topbar .layout-topbar-menu{
-    margin: 0px;
-    width: 100%;
-  }
   
 
-
-// icon section
-
-.header-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 10px;
+  .layout-topbar-logo{
+    text-decoration: none !important;
   }
-  
-  .bell-icon {
-    font-size: 20px;
-    color: #000;
-    margin-right: 20px;
-    cursor: pointer;
-    background: #bbbbbb;
-    padding: 10px;
+
+.bell-btn{
+border: none;
+border-radius: 50px;
+}
+
+.profiel-btn{
+border: none !important;
+border-radius: 50px !important;
+padding: 3px 15px;
+}
+
+.icons-Search{
+    width: 20px !important;
+}
+
+.Search {
+    border: none;
+}
+
+.Search-bar-btn{
+    border: 1px solid #e0e0e0;
     border-radius: 50px;
-  }
-  
-  .profile-dropdown {
-    display: flex;
-    align-items: center;
     padding: 10px 10px;
-    background: #bbbbbb;
-    border-radius: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-  }
-  
-  .profile-emoji {
-    margin-right: 8px;
-  }
-  
-  .profile-name {
-    margin-right: 8px;
-    font-weight: 500;
-  }
-  
-  .dropdown-icon {
-    font-size: 16px;
-  }
-  
+}
 
-
-
-  .button-color button{
-    color: #ffff;
-    background: #1D5755;
-  }
+*{
+    text-decoration: none !important;
+}

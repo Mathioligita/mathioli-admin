@@ -1,10 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
-// import axios from "axios";
+import axios from "axios";
 import Swal from "sweetalert2";
-// import { API_BASE_URL } from "../../utlis";
+import { API_BASE_URL } from "../../utlis";
 import "./QuotePage.css";
-import { quoteDelete, quoteGET, quotePAtch, quotePOSt } from "../../../api/page";
+import { Button } from "primereact/button";
 
 export default function QuotePage() {
     const [quotes, setQuotes] = useState([]);
@@ -24,10 +24,10 @@ export default function QuotePage() {
     const fetchQuotes = async () => {
         setLoading(true);
         try {
-            // const headers = { Authorization: `Bearer ${accessToken}` };
-            // const response = await axios.get(`${API_BASE_URL}/quote`, { headers });
-            const response = await quoteGET()
-            setQuotes(response.data);
+            const headers = { Authorization: `Bearer ${accessToken}` };
+            const response = await axios.get(`${API_BASE_URL}/quote`, { headers });
+
+            setQuotes(response.data.data);
         } catch (error) {
             console.error("Error fetching quotes:", error);
             setError("There was an error fetching the quotes.");
@@ -44,26 +44,15 @@ export default function QuotePage() {
             const headers = { Authorization: `Bearer ${accessToken}` };
 
             if (editMode && selectedQuote) {
-                // await axios.patch(
-                //     `${API_BASE_URL}/quote/${selectedQuote._id}`,
-                //     formData,
-                //     { headers }
-                // );
-                const id = selectedQuote._id
-                const data = formData
-                const response = await quotePAtch(id, data)
-                if (response) {
-
-                    Swal.fire("Updated!", "Quote updated successfully.", "success");
-                }
+                await axios.patch(
+                    `${API_BASE_URL}/quote/${selectedQuote._id}`,
+                    formData,
+                    { headers }
+                );
+                Swal.fire("Updated!", "Quote updated successfully.", "success");
             } else {
-                // await axios.post(`${API_BASE_URL}/quote`, formData, { headers });
-                const data = formData
-                const response = await quotePOSt(data)
-                if (response) {
-
-                    Swal.fire("Created!", "Quote created successfully.", "success");
-                }
+                await axios.post(`${API_BASE_URL}/quote`, formData, { headers });
+                Swal.fire("Created!", "Quote created successfully.", "success");
             }
 
             setFormData({ quote: "", author: "", date: "" });
@@ -88,14 +77,10 @@ export default function QuotePage() {
 
     const handleDelete = async (id) => {
         try {
-            // const headers = { Authorization: `Bearer ${accessToken}` };
-            // await axios.delete(`${API_BASE_URL}/quote/${id}`, { headers });
-            const response = await quoteDelete(id);
-            if (response) {
-
-                Swal.fire("Deleted!", "Quote deleted successfully.", "success");
-                fetchQuotes();
-            }
+            const headers = { Authorization: `Bearer ${accessToken}` };
+            await axios.delete(`${API_BASE_URL}/quote/${id}`, { headers });
+            Swal.fire("Deleted!", "Quote deleted successfully.", "success");
+            fetchQuotes();
         } catch (error) {
             console.error("Error deleting quote:", error);
             setError("There was an error deleting the quote.");
@@ -103,19 +88,28 @@ export default function QuotePage() {
     };
 
     return (
-        <div>
-            <h1 className="quote-page-title">Quotes</h1>
-            {error && <p className="quote-page-error">{error}</p>}
+        <div className="p-4">
+            <div className="d-flex ">
+                <div className="flex-fill">         
+                    <h1 className="quote-page-title text-start" >Quotes</h1>
+                </div>
+                <div className="">
+                    {error && <p className="quote-page-error">{error}</p>}
+                    <div className="text-end">
+                        <Button
+                            className="quote-page-add-btn "
+                            onClick={() => {
+                                setIsModalOpen(true);
+                                setEditMode(false);
+                            }}
+                        >
+                            Add New Quote
+                        </Button>
+                    </div></div>
+            </div>
 
-            <button
-                className="quote-page-add-btn"
-                onClick={() => {
-                    setIsModalOpen(true);
-                    setEditMode(false);
-                }}
-            >
-                Add New Quote
-            </button>
+
+
 
             <table className="quote-table">
                 <thead>
@@ -134,19 +128,32 @@ export default function QuotePage() {
                                 <td>{quote.quote}</td>
                                 <td>{quote.author}</td>
                                 <td>{quote.date}</td>
-                                <td>
-                                    <button
-                                        className="quote-edit-btn"
-                                        onClick={() => handleEdit(quote)}
-                                    >
-                                        Edit
-                                    </button>
-                                    <button
-                                        className="quote-delete-btn"
-                                        onClick={() => handleDelete(quote._id)}
-                                    >
-                                        Delete
-                                    </button>
+                                <td >
+                                    <div className="d-flex " style={{ justifyContent: "space-between" }} >
+
+                                        <div>
+
+                                            <Button
+                                                className="quote-edit-btn"
+                                                icon="pi pi-pencil"
+                                                style={{ all: "unset" }}
+                                                onClick={() => handleEdit(quote)}
+                                            >
+
+                                            </Button>
+                                        </div>
+                                        <div>
+
+                                            <Button
+                                                className="quote-delete-btn"
+                                                style={{ all: "unset" }}
+                                                icon="pi pi-trash"
+                                                onClick={() => handleDelete(quote._id)}
+                                            >
+
+                                            </Button>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         ))
@@ -205,20 +212,29 @@ export default function QuotePage() {
                                     required
                                 />
                             </div>
-                            <button
-                                className="quote-submit-btn"
-                                type="submit"
-                                disabled={loading}
-                            >
-                                {editMode ? "Update" : "Create"}
-                            </button>
-                            <button
-                                className="quote-cancel-btn"
-                                type="button"
-                                onClick={() => setIsModalOpen(false)}
-                            >
-                                Cancel
-                            </button>
+                            <div className="d-flex" style={{ justifyContent: "space-between" }}>
+
+                                <div>
+
+                                    <Button
+                                        className="quote-submit-btn"
+                                        type="submit"
+                                        disabled={loading}
+                                    >
+                                        {editMode ? "Update" : "Create"}
+                                    </Button>
+                                </div>
+                                <div>
+
+                                    <button
+                                        className="quote-cancel-btn"
+                                        type="button"
+                                        onClick={() => setIsModalOpen(false)}
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

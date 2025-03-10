@@ -19,6 +19,8 @@
   color:var(--text);
   margin: 0;
   padding: 0;
+  text-decoration: none !important;
+  list-style: none !important;
 } 
 //  a{
 //   color: inherit;
@@ -176,3 +178,8 @@
 //       }
 //   }
 // } 
+
+
+.span.p-inputswitch-slider{
+  background: #34C759 !important;
+}

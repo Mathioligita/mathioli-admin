@@ -10,7 +10,12 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 import Charts from "../ui/dashboard/chart/chart";
 export default function Dashboardpage() {
   return (
-    <></>
+    <>
+    <div>
+      <h1>Dashboard</h1>
+      <p>Hi, Samantha. Welcome back  to Mathioli Admin!</p>
+    </div>
+    </>
    
 //     <div className="grid">
 //     <div className="col-12 lg:col-6 xl:col-12">

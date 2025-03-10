@@ -1,0 +1,144 @@
+/* Container Styling */
+.container {
+  max-width: 900px;
+  // margin: 40px auto;
+  padding: 20px;
+  // background-color: #ffffff; /* White background for the form */
+  // box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border-radius: 8px;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.btn-close {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/* Heading */
+h5 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #343a40;
+  /* Dark grey */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  color: #495057;
+  /* Grey label color */
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  border: 1px solid #ced4da;
+  /* Light grey border */
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1rem;
+  width: 100%;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:focus {
+    border-color: #80bdff;
+    /* Blue border on focus */
+    // box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Blue glow */
+  }
+}
+
+/* File Input */
+input[type="file"] {
+  font-size: 0.9rem;
+  padding: 8px;
+}
+
+/* Checkboxes and Radio Buttons */
+input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.checkbox-group {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+
+  label {
+    margin-right: 15px;
+  }
+}
+
+/* Error Messages */
+.text-danger {
+  font-size: 0.85rem;
+  color: #dc3545;
+  /* Bootstrap danger red */
+  margin-top: 5px;
+}
+
+/* Buttons */
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background-color: #007bff;
+  /* Bootstrap primary blue */
+  border: none;
+  color: white;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #0056b3;
+    /* Darker blue on hover */
+  }
+}
+
+/* Row and Column Styling */
+.row {
+  margin-bottom: 20px;
+
+  .col {
+    padding: 0 10px;
+  }
+}
+
+/* Checkbox Group */
+.checkbox-group {
+  margin-top: 15px;
+}
+
+.checkbox-group label {
+  margin-right: 20px;
+  font-weight: normal;
+  color: #495057;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  h5 {
+    font-size: 1.5rem;
+  }
+
+  button[type="submit"] {
+    font-size: 1rem;
+    padding: 8px 0;
+  }
+}

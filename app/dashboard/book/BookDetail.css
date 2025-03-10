@@ -14,7 +14,7 @@
   .book-image img {
     max-width: 100%;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
   }
   
   .book-info {
@@ -88,7 +88,7 @@
 }
 
 .p-datatable td {
-  text-align: center;
+  /* text-align: center; */
   padding: 12px;
 }
 
@@ -195,10 +195,75 @@
   }
 }
 
+ /* switch */
+.btn-switch .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
 
-tbody, td, tfoot, th, thead, tr{
-  border-color: #808080;
-  border-style: solid;
-  border-width: 0;
-  justify-items: center !important;
+.btn-switch .switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.btn-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.btn-switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #34C759;
+}
+
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #34C759;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.btn-switch .slider.round {
+  border-radius: 34px;
+}
+
+.btn-switch .slider.round:before {
+  border-radius: 50%;
+}
+
+/*  */
+
+.form-check-input[type=checkbox]{
+  border-radius: 100%;
+}
+
+.form-check-input:checked {
+  background-color: #289020;
+  border-color: #000;
 }

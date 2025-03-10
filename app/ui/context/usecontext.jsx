@@ -38,36 +38,3 @@
 //     }
 //     return context;
 // };
-"use client";
-import React, { createContext, useState, useContext } from "react";
-
-const userContext = createContext();
-
-export const UserProvider = ({ children }) => {
-  const [textColor, setTextColor] = useState("black");
-  const [fontFamily, setFontFamily] = useState("Arial");
-  const [backgroundColor, setBackgroundColor] = useState("#151c2c");
-
-  return (
-    <userContext.Provider
-      value={{
-        textColor,
-        fontFamily,
-        backgroundColor,
-        setTextColor,
-        setFontFamily,
-        setBackgroundColor,
-      }}
-    >
-      {children}
-    </userContext.Provider>
-  );
-};
-
-export const useUserContext = () => {
-  const context = useContext(userContext);
-  if (!context) {
-    throw new Error("useUserContext must be used within a UserProvider");
-  }
-  return context;
-};

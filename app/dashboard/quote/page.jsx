@@ -2,7 +2,7 @@ import React from 'react'
 import QuotePage from "./quotepage"
 export default function page() {
     return (
-        <div>
+        <div className=''>
             <QuotePage/>
 
         </div>

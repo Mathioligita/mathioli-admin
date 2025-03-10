@@ -10,7 +10,7 @@
     margin-bottom: 10px;
   }
   
-  .quote-page-add-btn {
+  /* .quote-page-add-btn {
     display: block;
     margin: 10px auto;
     padding: 10px 20px;
@@ -19,7 +19,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
+  } */
   
   .quote-table {
     width: 100%;

@@ -22,12 +22,14 @@ export default function LoginPage() {
     setLoading(true);
     try {
       const response = await axios.post(`${API_BASE_URL}/admins/login`, {
+      // const response = await axios.post(`https://0b8c-2401-4900-3606-8a1-856d-803-647e-eabb.ngrok-free.app/api/v1/users/login`, {
         email: values.email,
         password: values.password,
       });
       const { accessToken, refreshToken } = response.data.data;
 
-   
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
       Cookies.set("accessToken", accessToken)
       Cookies.set("refreshToken", refreshToken)
       Swal.fire({
@@ -74,7 +76,7 @@ export default function LoginPage() {
       <div className="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
         <div className="text-center mb-5 col-6">
           <div className="text-900 text-3xl font-medium mb-3">
-            Welcome, jeeva!
+            Welcome!
           </div>
           <span className="text-600 font-medium">Sign in to continue</span>
         </div>

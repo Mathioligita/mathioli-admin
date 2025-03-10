@@ -258,16 +258,11 @@ h1 {
 }
 
 .p-button-success {
-  background-color: transparent;
-  border: 1px solid #a8a8a8;
-  color: #000;
+  background-color: #1d5755;
+  border: none;
+  color: white;
   font-weight: 600;
   transition: background-color 0.3s ease;
-  border-radius: 12px;
-}
-
-.p-button, .p-dropdown{
-  border-radius: 12px;
 }
 
 .p-button-success:hover {
@@ -276,11 +271,6 @@ h1 {
 
 .custom-modal-content {
   padding: 16px;
-}
-
-.p-button-help{
-  background: #27ae60;
-  border: 0px solid;
 }
 
 /* Keyframes for Fade In Animation */
@@ -317,8 +307,6 @@ h1 {
   text-align: left;
 }
 
-
-
 .datatable-responsive .p-datatable-tbody > tr > td {
   padding: 12px;
   color: #555;
@@ -334,18 +322,15 @@ h1 {
 }
 
 
-
-
-// button
-/* Toggle Switch */
+// switch
 .switch {
   position: relative;
   display: inline-block;
-  width: 34px;
-  height: 20px;
+  width: 60px;
+  height: 34px;
 }
 
-.switch input {
+.switch input { 
   opacity: 0;
   width: 0;
   height: 0;
@@ -358,29 +343,52 @@ h1 {
   left: 0;
   right: 0;
   bottom: 0;
-  background: #ccc;
-  transition: 0.4s;
-  border-radius: 20px;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
 }
 
 .slider:before {
   position: absolute;
-  content: '';
-  height: 14px;
-  width: 14px;
-  left: 3px;
-  bottom: 3px;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
   background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
+  -webkit-transition: .4s;
+  transition: .4s;
 }
 
 input:checked + .slider {
-  background: #4caf50; /* Match green color */
+  background-color: #34C759;
+}
+
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #34C759;
 }
 
 input:checked + .slider:before {
-  transform: translateX(14px);
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
 }
 
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
 
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.form-check-input[type=checkbox]{
+  border-radius: 100%;
+}
+
+.form-check-input:checked {
+  background-color: #289020;
+  border-color: #000;
+}
