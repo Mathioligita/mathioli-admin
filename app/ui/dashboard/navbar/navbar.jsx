@@ -34,15 +34,18 @@
 "use client";
 import Link from "next/link";
 import { classNames } from "primereact/utils";
-import React from "react";
+import React, { useContext } from "react";
 import { Chip } from "primereact/chip";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 // import axiosInstance from '../../../../axiosConfig';
 import "./navba.scss";
 import { useState } from "react";
+import UserContext from "../../context/usecontext";
 
 const Navbar = () => {
   const [query, setQuery] = useState("");
+  const {dashboardData}=useContext(UserContext)
+  console.log(dashboardData,"dashboarddata")
   return (
     <div className="layout-topbar " style={{borderBottom:"1px solid #8080804f"}}>
       <div className=""></div>
@@ -92,7 +95,7 @@ const Navbar = () => {
                   className="flex items-center align-items-center profiel-btn"
                 >
                   <span className="text-xl">🧑🏼‍💼</span>
-                  <span className="ml-2 text-gray-700">Mathioli</span>
+                  <span className="ml-2 text-gray-700">{dashboardData?.firstName}</span>
                 </button>
               </Link>
             </div>

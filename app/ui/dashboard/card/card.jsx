@@ -15,27 +15,7 @@ export default function Cardpage() {
                     </p>
        
             </Card>
-            <Card className="p-0">
-                <p>card2</p>
-                <p className="">
-                    Lorem ipsum dolor sit 
-                </p>
-       
-            </Card>
-            <Card className="p-0">
-                <p>card3</p>
-                <p className="">
-                    Lorem ipsum dolor sit 
-       
-                </p>
-            </Card>
-            <Card className="p-0">
-                <p>card4</p>
-                <p className="">
-                    Lorem ipsum dolor sit 
-       
-                </p>
-            </Card>
+            
            
         </div>
 </>

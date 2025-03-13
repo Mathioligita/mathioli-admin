@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import "primeflex/primeflex.css";
 
 import "./sidebar.scss";
@@ -13,6 +13,7 @@ import { MdLocalShipping } from "react-icons/md";
 
 const Sidebar = () => {
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(true);
   // const { backgroundColor, textColor, fontFamily } = useUserContext();
   const model = [
     {
@@ -25,11 +26,11 @@ const Sidebar = () => {
       label: "Components",
       items: [
         // { label: "Company", icon: "pi pi-fw pi-id-card", to: "/dashboard/company" },
-        {
-          label: "Plan",
-          icon: "fa-solid fa-clipboard",
-          to: "/dashboard/plans",
-        },
+        // {
+        //   label: "Plan",
+        //   icon: "fa-solid fa-clipboard",
+        //   to: "/dashboard/plans",
+        // },
         {
           label: "Category",
           icon: "fa-solid fa-box-archive",
@@ -70,56 +71,64 @@ const Sidebar = () => {
     router.push("/login");
   };
 
-  return (
-    <div style={{borderRight:"1px solid #8080804f"}}>
-      <div>
-        <img src="/svg/Final-Logo 2.png" alt="" width={"100%"} />
-        <ul className="layout-menu">
-          {model.map((section, index) => (
-            <li key={index} className="layout-root-menuitem">
-              <span className="layout-menuitem-root-text">
-                {/* {section.label} */}
-              </span>
-              {section.items && (
-                <ul className="sub-menu">
-                  {section.items.map((item, subIndex) => (
-                    <a
-                      href={item.to}
-                      className="p-ripple"
-                      tabIndex={0}
-                      key={subIndex}
-                    >
-                      <i
-                        className={`layout-menuitem-icon ${item.icon} `}
-                        style={{ fontSize: "17px" }}
-                      ></i>
-                      <span className="layout-menuitem-text">{item.label}</span>
-                    </a>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))}
-          <ul className="sub-menu">
-            <a className=" layout-topbar-button" onClick={handleLogout}>
-              <i
-                className="fa-solid fa-right-from-bracket layout-menuitem-icon "
-                style={{ fontSize: "17px" }}
-              ></i>
-              <span className="layout-menuitem-text">Log out</span>
-            </a>
-          </ul>
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
 
-          <div className="book-image">
-            <img
-              src="../book.png"
-              alt="book"
-              className="img-fliud sidebar-footer-image"
-              loading="lazy"
-            />
-          </div>
-        </ul>
+  return (
+    <div className={`sidebar ${isOpen ? "open" : "closed"}`} style={{borderRight:"1px solid #8080804f"}}>
+      <div className="d-flex justify-content-between align-items-center">
+      {isOpen ? <div className="text-center mt-2">
+          <img src="/svg/Final-Logo 2.png" className="ms-3" alt="" width={"180px"} />
+        </div> :null }
+        <i className="pi pi-align-justify toggle-button mt-3 fw-bold" onClick={toggleSidebar}></i>
       </div>
+      <ul className="layout-menu">
+        {model.map((section, index) => (
+          <li key={index} className="layout-root-menuitem">
+            <span className="layout-menuitem-root-text">
+              {/* {section.label} */}
+            </span>
+            {section.items && (
+              <ul className="sub-menu">
+                {section.items.map((item, subIndex) => (
+                  <a
+                    href={item.to}
+                    className="p-ripple"
+                    tabIndex={0}
+                    key={subIndex}
+                  >
+                    <i
+                      className={item?.icon}
+                      // style={{ fontSize: "17px" }}
+                    ></i>
+                    <span className="layout-menuitem-text">{item.label}</span>
+                  </a>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+        <ul className="sub-menu">
+          <a className=" layout-topbar-button" onClick={handleLogout}>
+            <i
+              className="fa-solid fa-right-from-bracket layout-menuitem-icon "
+              style={{ fontSize: "17px" }}
+            ></i>
+            <span className="layout-menuitem-text">Log out</span>
+          </a>
+        </ul>
+        {isOpen ?
+        <div className="book-image">
+          <img
+            src="../book.png"
+            alt="book"
+            className="img-fliud sidebar-footer-image"
+            loading="lazy"
+            width={"100px"}
+          />
+        </div>:null}
+      </ul>
     </div>
   );
 };

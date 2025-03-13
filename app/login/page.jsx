@@ -17,14 +17,15 @@ import { API_BASE_URL } from "../utlis";
 import Cookies from "js-cookie"
 
 export default function LoginPage() {
+  const guest = Cookies.get("guestId")
   const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
   const handleLogin = async () => {
     setLoading(true);
     try {
       const response = await axios.post(`${API_BASE_URL}/admins/login`, {
-      // const response = await axios.post(`https://0b8c-2401-4900-3606-8a1-856d-803-647e-eabb.ngrok-free.app/api/v1/users/login`, {
         email: values.email,
         password: values.password,
+        guestId:guest
       });
       const { accessToken, refreshToken } = response.data.data;
 

@@ -418,6 +418,7 @@ import "./profile.scss";
 import Swal from "sweetalert2";
 
 import { API_BASE_URL } from "../../utlis";
+import Cookies from "js-cookie";
 // import axiosInstance from "../../../axiosConfig";
 
 export default function Profile() {
@@ -431,14 +432,18 @@ export default function Profile() {
     phoneNumber: "",
   });
   const [file, setFile] = useState(null);
+  
 
-  const accessToken = localStorage.getItem("accessToken");
+  const accessToken = Cookies.get("accessToken");
 
   useEffect(() => {
     if (accessToken) {
+   
+        const headers = { Authorization: `Bearer ${accessToken}` };
+      
     
       axios
-        .get(`${API_BASE_URL}/admins/me`, )
+        .get(`${API_BASE_URL}/admins/me`,{headers} )
         .then((response) => {
           setData(response.data.data);
           setForm({

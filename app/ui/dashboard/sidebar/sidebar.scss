@@ -26,8 +26,11 @@
     outline: 0 none;
     color: var(--text-color);
     cursor: pointer;
-    // padding: 0.75rem 1rem;
     text-decoration: none;
+
+    i {
+        margin-right: 0.7rem;
+    }
 
     a {
 
@@ -93,7 +96,7 @@
             outline: 0 none;
             color: var(--text-color);
             cursor: pointer;
-            padding: 1rem;
+            padding: 12px;
             text-decoration: none;
             // left: 40px;
             margin: 0 0 0 30px;
@@ -212,4 +215,30 @@
         display: none;
     }
     
+}
+
+.sidebar {
+  transition: width 0.3s;
+  &.closed {
+    width: 60px;
+    .layout-menuitem-root-text,
+    .layout-menuitem-text {
+      display: none;
+    }
+    .layout-menu ul a{
+        margin: 0 !important;
+        padding: 17px;
+        font-size: larger;
+    }
+  }
+  &.open {
+    width: 250px;
+  }
+}
+
+.toggle-button {
+  @media (max-width: 1024px) {
+    display: block;
+  }
+  margin: 10px;
 }

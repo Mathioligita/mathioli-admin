@@ -1,0 +1,13 @@
+.quoteSection {
+  margin-bottom: 20px;
+}
+
+.quoteSection input {
+  display: block;
+  margin: 10px 0;
+}
+
+.quoteSection button {
+  display: block;
+  margin-top: 10px;
+}
