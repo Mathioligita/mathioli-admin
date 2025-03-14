@@ -93,7 +93,7 @@ export default function ShippingTable() {
 
     const actionTemplate = (rowData) => {
         return (
-            <div className='d-flex justify-content-center'>
+            <div className='d-flex justify-content-start'>
                 <div >
 
                     <Button
@@ -104,14 +104,14 @@ export default function ShippingTable() {
                         onClick={() => editRegion(rowData)}
                     />
                 </div>
-                <div>
+                {/* <div>
                     <Button
                         icon="pi pi-eye"
                         style={{ all: "unset" }}
                         className="p-button-text"
                     // onClick={}
                     />
-                </div>
+                </div> */}
                 <div>
                     <Button
                         // label="Delete"
@@ -135,10 +135,12 @@ export default function ShippingTable() {
                     </div>
                 </div>
             </div>
+            <div className='mt-4'>
+
             <DataTable value={shippingRegions} responsiveLayout="scroll">
 
                 {/* <Column header="S.No" body={(rowData) => console.log(rowData,"dfgj")} /> */}
-                <Column headerStyle={{ width: "3rem" }} body={checkboxs} />
+                {/* <Column headerStyle={{ width: "3rem" }} body={checkboxs} /> */}
                 <Column field="country" header="Country" />
                 <Column
                     body={(rowData) =>
@@ -159,6 +161,7 @@ export default function ShippingTable() {
                 />
                 <Column body={actionTemplate} className="text-center" header="Actions" />
             </DataTable>
+            </div>
         </div>
     )
 }

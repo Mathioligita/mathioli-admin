@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useContext, useEffect, useState } from "react";
 import { Card } from "primereact/card";
@@ -12,12 +12,12 @@ import axios from "axios";
 import "../styles/dashboard.css";
 import { Col, Row } from "react-bootstrap";
 import UserContext from "../ui/context/usecontext";
-import QuotePage from "./quote/quotepage";
+import QuotePage from "./dashboardpage/qoutepage/Quotepage";
 
 const Dashboardpage = () => {
   const accessToken = Cookies.get("accessToken");
   const [dashboard, setDashboard] = useState();
-  const {setDashboarddata } =useContext(UserContext)
+  const { setDashboarddata } = useContext(UserContext);
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -28,7 +28,7 @@ const Dashboardpage = () => {
         });
         console.log(response.data.data, "response");
         setDashboard(response.data.data);
-        setDashboarddata(response.data.data.admin)
+        setDashboarddata(response.data.data.admin);
       } catch (error) {
         console.error(error);
       }
@@ -37,12 +37,16 @@ const Dashboardpage = () => {
   }, []);
 
   const filterOptions = ["This Week", "This Month", "This Year"];
-  
+
   const pieData = {
     labels: ["Total Orders", "Total Delivered", "Total Revenue"],
     datasets: [
       {
-        data: [dashboard?.totalOrders || 0, dashboard?.totalDelivered || 0, dashboard?.totalRevenue || 0],
+        data: [
+          dashboard?.totalOrders || 0,
+          dashboard?.totalDelivered || 0,
+          dashboard?.totalRevenue || 0,
+        ],
         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
       },
     ],
@@ -56,11 +60,19 @@ const Dashboardpage = () => {
   };
 
   const orderTrendData = {
-    labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    labels: [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ],
     datasets: [
       {
         label: "Orders",
-        data: dashboard?.weeklyOrders?.map(order => order.count) || [],
+        data: dashboard?.weeklyOrders?.map((order) => order.count) || [],
         borderColor: "#42A5F5",
         fill: false,
       },
@@ -68,7 +80,20 @@ const Dashboardpage = () => {
   };
 
   const revenueData = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    labels: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
     datasets: [
       {
         label: "2020",
@@ -93,51 +118,167 @@ const Dashboardpage = () => {
       </div>
 
       <div className="stats">
-        <div className="stat-card text-center" style={{ height: "128px", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column",  }}>
+        <div
+          className="stat-card text-center"
+          style={{
+            height: "128px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
           <div className="stat-content">
-            <div style={{ marginBottom: "10px", backgroundColor: "#f0f8ff", padding: "10px", borderRadius: "50%", width: "60px", height: "60px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <img src="/Group 118.png" alt="" style={{ width: "100%", objectFit: "cover" }} />
+            <div
+              style={{
+                marginBottom: "10px",
+                backgroundColor: "#f0f8ff",
+                padding: "10px",
+                borderRadius: "50%",
+                width: "60px",
+                height: "60px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <img
+                src="/Group 118.png"
+                alt=""
+                style={{ width: "100%", objectFit: "cover" }}
+              />
             </div>
             <div>
-              <h3 style={{ fontWeight: "800" }}>{dashboard?.totalOrders || 0}</h3>
+              <h3 style={{ fontWeight: "800" }}>
+                {dashboard?.totalOrders || 0}
+              </h3>
               <p>Total Orders</p>
-              <span className="stat-percentage" style={{ color: "green" }}>{dashboard?.orderChange || 0}% increase</span>
+              <span className="stat-percentage" style={{ color: "green" }}>
+                {dashboard?.orderChange || 0}% increase
+              </span>
             </div>
           </div>
         </div>
-        <Card className="stat-card" style={{ height: "128px", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column",  }}>
+        <Card
+          className="stat-card"
+          style={{
+            height: "128px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
           <div className="stat-content">
-            <div style={{ marginBottom: "10px", backgroundColor: "#e6f7ff", padding: "10px", borderRadius: "50%", width: "60px", height: "60px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <img src="/Group 82.png" alt="" style={{ width: "100%", objectFit: "cover" }} />
+            <div
+              style={{
+                marginBottom: "10px",
+                backgroundColor: "#e6f7ff",
+                padding: "10px",
+                borderRadius: "50%",
+                width: "60px",
+                height: "60px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <img
+                src="/Group 82.png"
+                alt=""
+                style={{ width: "100%", objectFit: "cover" }}
+              />
             </div>
             <div>
-              <h3 style={{ fontWeight: "800" }}>{dashboard?.totalDelivered || 0}</h3>
+              <h3 style={{ fontWeight: "800" }}>
+                {dashboard?.totalDelivered || 0}
+              </h3>
               <p>Total Delivered</p>
-              <span className="stat-percentage" style={{ color: "green" }}>{dashboard?.deliveredChange || 0}% increase</span>
+              <span className="stat-percentage" style={{ color: "green" }}>
+                {dashboard?.deliveredChange || 0}% increase
+              </span>
             </div>
           </div>
         </Card>
-        <Card className="stat-card" style={{ height: "128px", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column",  }}>
+        <Card
+          className="stat-card"
+          style={{
+            height: "128px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
           <div className="stat-content">
-            <div style={{ marginBottom: "10px", backgroundColor: "#e6f7ff", padding: "10px", borderRadius: "50%", width: "60px", height: "60px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <img src="/Group 82.png" alt="" style={{ width: "100%", objectFit: "cover" }} />
+            <div
+              style={{
+                marginBottom: "10px",
+                backgroundColor: "#e6f7ff",
+                padding: "10px",
+                borderRadius: "50%",
+                width: "60px",
+                height: "60px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <img
+                src="/Group 82.png"
+                alt=""
+                style={{ width: "100%", objectFit: "cover" }}
+              />
             </div>
             <div>
-              <h3 style={{ fontWeight: "800" }}>{dashboard?.totalBooks || 0}</h3>
+              <h3 style={{ fontWeight: "800" }}>
+                {dashboard?.totalBooks || 0}
+              </h3>
               <p>Total Books</p>
-              <span className="stat-percentage" style={{ color: "red" }}>2% decline</span>
+              <span className="stat-percentage" style={{ color: "red" }}>
+                2% decline
+              </span>
             </div>
           </div>
         </Card>
-        <Card className="stat-card" style={{ height: "128px", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
+        <Card
+          className="stat-card"
+          style={{
+            height: "128px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
           <div className="stat-content">
-            <div style={{ marginBottom: "10px", backgroundColor: "#fff5e6", padding: "10px", borderRadius: "50%", width: "60px", height: "60px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <img src="/Group 122.png" alt="" style={{ width: "100%", objectFit: "cover" }} />
+            <div
+              style={{
+                marginBottom: "10px",
+                backgroundColor: "#fff5e6",
+                padding: "10px",
+                borderRadius: "50%",
+                width: "60px",
+                height: "60px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <img
+                src="/Group 122.png"
+                alt=""
+                style={{ width: "100%", objectFit: "cover" }}
+              />
             </div>
             <div>
-              <h3 style={{ fontWeight: "800" }}>{dashboard?.totalRevenue || 0}</h3>
+              <h3 style={{ fontWeight: "800" }}>
+                {dashboard?.totalRevenue || 0}
+              </h3>
               <p>Total Revenue</p>
-              <span className="stat-percentage" style={{ color: "green" }}>4% increase</span>
+              <span className="stat-percentage" style={{ color: "green" }}>
+                4% increase
+              </span>
             </div>
           </div>
         </Card>
@@ -163,7 +304,7 @@ const Dashboardpage = () => {
         <Col>
           <div className="quote-section">
             <h3>Create Today's Quote</h3>
-            <div style={{ maxHeight: "200px",overflow:"auto" }}>
+            <div style={{ maxHeight: "200px", overflow: "auto" }}>
               <QuotePage />
             </div>
           </div>
@@ -179,4 +320,3 @@ const Dashboardpage = () => {
 };
 
 export default Dashboardpage;
-

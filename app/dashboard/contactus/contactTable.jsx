@@ -1,4 +1,3 @@
-
 // "use client"
 // import React, { useEffect, useState } from 'react';
 // import { Table, Button, Form, InputGroup, FormControl, Row, Col } from 'react-bootstrap';
@@ -108,7 +107,6 @@
 
 //       {
 
-
 //         <div className="container">
 //           <h2 className="text-center mb-4">Contact Management</h2>
 //           <Row className='mbl-part'>
@@ -138,7 +136,6 @@
 //               </div>
 //             </Col>
 //           </Row>
-
 
 //           <Table striped hover responsive>
 //             <thead className="table-secondary">
@@ -219,7 +216,9 @@ const ContactTable = () => {
     const fetchContacts = async () => {
       try {
         const headers = { Authorization: `Bearer ${accessToken}` };
-        const response = await axios.get(`${API_BASE_URL}/contactus`, { headers });
+        const response = await axios.get(`${API_BASE_URL}/contactus`, {
+          headers,
+        });
         if (response) {
           setContacts(response?.data?.data?.inquiries || []);
         }
@@ -262,13 +261,13 @@ const ContactTable = () => {
     <div className="flex gap-2">
       <Button
         icon="pi pi-pencil"
-        style={{all:"unset"}}
+        style={{ all: "unset" }}
         className="p-button-rounded p-button-info"
         onClick={() => router.push(`/dashboard/contactus/${rowData._id}`)}
       />
       <Button
         icon="pi pi-trash"
-        style={{all:"unset"}}
+        style={{ all: "unset" }}
         className="p-button-rounded p-button-danger"
         onClick={() => handleDelete(rowData._id)}
       />
@@ -277,23 +276,27 @@ const ContactTable = () => {
 
   return (
     <div className="container">
-      <h2 className="text-center mb-4">Contact Management</h2>
+      <h4 className="text-start mb-4">Contact Management</h4>
 
       {/* Search Bar */}
       <div className="mb-3 flex flex-wrap justify-content-between">
-        <InputText
-          placeholder="Search by Name, Email, or Mobile No"
-          value={search}
-          style={{fontSize:"12px"}}
-          onChange={(e) => setSearch(e.target.value)}
-          className="p-inputtext-lg mb-3"
-        />
-        <Button
-          label=" Add Contact"
-          icon="pi pi-plus"
-          className="p-button-success p-button-rounded "
-          onClick={() => router.push("/dashboard/contactus/create")}
-        />
+        <div>
+          <InputText
+            placeholder="Search by Name, Email, or Mobile No"
+            value={search}
+            style={{ fontSize: "12px" }}
+            onChange={(e) => setSearch(e.target.value)}
+            className="p-inputtext-lg mb-3"
+          />
+        </div>
+        <div>
+          <Button
+            label=" Add Contact"
+            icon="pi pi-plus"
+            className="p-button-success p-button-rounded "
+            onClick={() => router.push("/dashboard/contactus/create")}
+          />
+        </div>
       </div>
 
       {/* PrimeReact DataTable */}

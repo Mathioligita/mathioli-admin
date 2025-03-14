@@ -29,10 +29,10 @@ export default function LoginPage() {
       });
       const { accessToken, refreshToken } = response.data.data;
 
+      Cookies.set("refreshToken", refreshToken)
+      Cookies.set("accessToken", accessToken)
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
-      Cookies.set("accessToken", accessToken)
-      Cookies.set("refreshToken", refreshToken)
       Swal.fire({
         title: "Success!",
         text: "Login successful.",

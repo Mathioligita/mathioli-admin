@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useState, useEffect } from "react";
 import { InputText } from "primereact/inputtext";
@@ -7,7 +6,7 @@ import { InputSwitch } from "primereact/inputswitch";
 import { Button } from "primereact/button";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Dropdown } from "primereact/dropdown";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./CreateBookForm.css";
 import axios from "axios";
 import { Col, Row } from "react-bootstrap";
@@ -15,12 +14,12 @@ import Cookies from "js-cookie";
 import { API_BASE_URL } from "../../utlis";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
-import './createbook.css'
+import "./createbook.css";
 
 const EditBookForm = ({ id }) => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const accessToken = Cookies.get("accessToken");
-  const router = useRouter()
+  const router = useRouter();
   const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
     title: "",
@@ -76,39 +75,43 @@ const EditBookForm = ({ id }) => {
     });
 
     try {
-      const response = await axios.patch(`${API_BASE_URL}/book/${id}`, payload, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${accessToken}`
-        },
-      });
+      const response = await axios.patch(
+        `${API_BASE_URL}/book/${id}`,
+        payload,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      console.log(response, "response");
       if (response) {
         Swal.fire({
-          title: 'Success!',
-          text: 'The book has been updated successfully.',
-          icon: 'success',
-          confirmButtonText: 'OK'
+          title: "Success!",
+          text: "Book updated Successfully",
+          icon: "success",
+          confirmButtonText: "OK",
         });
         router.push("/dashboard/book");
       } else {
         Swal.fire({
-          title: 'Error!',
-          text: 'There was an error updating the book.',
-          icon: 'error',
-          confirmButtonText: 'OK'
+          title: "Error!",
+          text: "There was an error updating the book.",
+          icon: "error",
+          confirmButtonText: "OK",
         });
       }
     } catch (error) {
       console.error("Error updating book:", error);
       Swal.fire({
-        title: 'Error!',
-        text: 'An unexpected error occurred while updating the book.',
-        icon: 'error',
-        confirmButtonText: 'OK'
+        title: "Error!",
+        text: "An unexpected error occurred while updating the book.",
+        icon: "error",
+        confirmButtonText: "OK",
       });
     }
   };
-
 
   const fetchCategories = async () => {
     try {
@@ -123,7 +126,9 @@ const EditBookForm = ({ id }) => {
   const fetchBook = async () => {
     try {
       const headers = { Authorization: `Bearer ${accessToken}` };
-      const response = await axios.get(`${API_BASE_URL}/book/${id}`, { headers });
+      const response = await axios.get(`${API_BASE_URL}/book/${id}`, {
+        headers,
+      });
       const book = response.data.data.book[0];
       setFormData({
         title: book.title,
@@ -146,8 +151,8 @@ const EditBookForm = ({ id }) => {
         ebookPrice: book.EbookUpload,
         weightUnit: book?.weightUnit,
         weight: book?.weight,
-        awardWinningBook:book?.awardWinningBook,
-        newArrival:book?.newArrival,
+        awardWinningBook: book?.awardWinningBook,
+        newArrival: book?.newArrival,
       });
     } catch (error) {
       console.error("Error fetching book:", error);
@@ -170,7 +175,7 @@ const EditBookForm = ({ id }) => {
                 type="file"
                 accept="image/*"
                 multiple
-                onChange={(e) => handleFileChange(e, 'books')}
+                onChange={(e) => handleFileChange(e, "books")}
               />
               {formData.books.map((file, index) => (
                 <div key={index}>{file.name}</div>
@@ -182,7 +187,9 @@ const EditBookForm = ({ id }) => {
               <label>Title</label> <br />
               <InputText
                 value={formData.title}
-                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, title: e.target.value })
+                }
                 className="w-100"
               />
             </div>
@@ -192,7 +199,9 @@ const EditBookForm = ({ id }) => {
               <label>Author</label> <br />
               <InputText
                 value={formData.author}
-                onChange={(e) => setFormData({ ...formData, author: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, author: e.target.value })
+                }
                 className="w-100"
               />
             </div>
@@ -205,7 +214,9 @@ const EditBookForm = ({ id }) => {
               <label>Genre</label> <br />
               <InputText
                 value={formData.genre}
-                onChange={(e) => setFormData({ ...formData, genre: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, genre: e.target.value })
+                }
                 className="w-100"
               />
             </div>
@@ -215,7 +226,9 @@ const EditBookForm = ({ id }) => {
               <label>Price</label> <br />
               <InputText
                 value={formData.price}
-                onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, price: e.target.value })
+                }
                 className="w-100"
               />
             </div>
@@ -229,7 +242,9 @@ const EditBookForm = ({ id }) => {
               <Dropdown
                 value={formData?.category}
                 options={categories.map((item) => item.name)}
-                onChange={(e) => setFormData({ ...formData, category: e.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, category: e.value })
+                }
                 className="w-100"
                 placeholder="Select a Category"
               />
@@ -240,7 +255,9 @@ const EditBookForm = ({ id }) => {
               <label>Publish Date</label> <br />
               <Calendar
                 value={formData.publishDate}
-                onChange={(e) => setFormData({ ...formData, publishDate: e.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, publishDate: e.value })
+                }
                 className="w-100"
               />
             </div>
@@ -253,7 +270,9 @@ const EditBookForm = ({ id }) => {
               <label>Publisher</label> <br />
               <InputText
                 value={formData.publisher}
-                onChange={(e) => setFormData({ ...formData, publisher: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, publisher: e.target.value })
+                }
                 className="w-100"
               />
             </div>
@@ -263,7 +282,9 @@ const EditBookForm = ({ id }) => {
               <label>Language</label> <br />
               <InputText
                 value={formData.language}
-                onChange={(e) => setFormData({ ...formData, language: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, language: e.target.value })
+                }
                 className="w-100"
               />
             </div>
@@ -276,7 +297,9 @@ const EditBookForm = ({ id }) => {
               <label>Pages</label> <br />
               <InputText
                 value={formData.pages}
-                onChange={(e) => setFormData({ ...formData, pages: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, pages: e.target.value })
+                }
                 className="w-100"
               />
             </div>
@@ -286,7 +309,9 @@ const EditBookForm = ({ id }) => {
               <label>quantity</label> <br />
               <InputText
                 value={formData.quantity}
-                onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, quantity: e.target.value })
+                }
                 className="w-100"
               />
             </div>
@@ -299,7 +324,9 @@ const EditBookForm = ({ id }) => {
               <label>Author Biography</label> <br />
               <InputTextarea
                 value={formData.authorBiography}
-                onChange={(e) => setFormData({ ...formData, authorBiography: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, authorBiography: e.target.value })
+                }
                 rows={5}
                 cols={30}
                 className="w-100"
@@ -311,7 +338,9 @@ const EditBookForm = ({ id }) => {
               <label>Description</label> <br />
               <InputTextarea
                 value={formData.description}
-                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, description: e.target.value })
+                }
                 rows={5}
                 cols={30}
                 className="w-100"
@@ -326,8 +355,10 @@ const EditBookForm = ({ id }) => {
               <div className="">
                 <InputSwitch
                   checked={formData.isAudiobookAvailable}
-                  onChange={(e) => setFormData({ ...formData, isAudiobookAvailable: e.value })}
-                  className='mr-3'
+                  onChange={(e) =>
+                    setFormData({ ...formData, isAudiobookAvailable: e.value })
+                  }
+                  className="mr-3"
                 />
               </div>
               <div className="">
@@ -340,8 +371,10 @@ const EditBookForm = ({ id }) => {
               <div className="">
                 <InputSwitch
                   checked={formData.isEBookAvailable}
-                  onChange={(e) => setFormData({ ...formData, isEBookAvailable: e.value })}
-                  className='mr-3'
+                  onChange={(e) =>
+                    setFormData({ ...formData, isEBookAvailable: e.value })
+                  }
+                  className="mr-3"
                 />
               </div>
               <div className="">
@@ -354,7 +387,9 @@ const EditBookForm = ({ id }) => {
               <div className="mr-3">
                 <InputSwitch
                   checked={formData.isHardCopyAvailable}
-                  onChange={(e) => setFormData({ ...formData, isHardCopyAvailable: e.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, isHardCopyAvailable: e.value })
+                  }
                 />
               </div>
               <div className="">
@@ -367,14 +402,15 @@ const EditBookForm = ({ id }) => {
               <div className="">
                 <InputSwitch
                   checked={formData.awardWinningBook}
-                  className='mr-3'
-                  onChange={(e) => setFormData({ ...formData, awardWinningBook: e.value })}
+                  className="mr-3"
+                  onChange={(e) =>
+                    setFormData({ ...formData, awardWinningBook: e.value })
+                  }
                 />
               </div>
               <div className="">
                 <label>Award Winning Book</label> <br />
               </div>
-
             </div>
           </Col>
           <Col>
@@ -382,14 +418,15 @@ const EditBookForm = ({ id }) => {
               <div className="">
                 <InputSwitch
                   checked={formData.newArrival}
-                  className='mr-3'
-                  onChange={(e) => setFormData({ ...formData, newArrival: e.value })}
+                  className="mr-3"
+                  onChange={(e) =>
+                    setFormData({ ...formData, newArrival: e.value })
+                  }
                 />
               </div>
               <div className="">
                 <label>New Arrival</label> <br />
               </div>
-
             </div>
           </Col>
         </Row>
@@ -403,7 +440,7 @@ const EditBookForm = ({ id }) => {
                   type="file"
                   accept="audio/*"
                   multiple
-                  onChange={(e) => handleFileChange(e, 'audiobooks')}
+                  onChange={(e) => handleFileChange(e, "audiobooks")}
                 />
                 {formData?.audiobooks?.map((file, index) => (
                   <div key={index}>{file.name}</div>
@@ -420,7 +457,7 @@ const EditBookForm = ({ id }) => {
                   type="file"
                   accept=".pdf,.epub"
                   multiple
-                  onChange={(e) => handleFileChange(e, 'ebooks')}
+                  onChange={(e) => handleFileChange(e, "ebooks")}
                 />
               </div>
               {/* </div> */}
@@ -435,7 +472,9 @@ const EditBookForm = ({ id }) => {
                 <label>Audiobook Price</label> <br />
                 <InputText
                   value={formData.audiobookPrice}
-                  onChange={(e) => setFormData({ ...formData, audiobookPrice: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, audiobookPrice: e.target.value })
+                  }
                   className="w-100"
                 />
               </div>
@@ -447,7 +486,9 @@ const EditBookForm = ({ id }) => {
                 <label>EBook Price</label> <br />
                 <InputText
                   value={formData.ebookPrice}
-                  onChange={(e) => setFormData({ ...formData, ebookPrice: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, ebookPrice: e.target.value })
+                  }
                   className="w-100"
                 />
               </div>
@@ -461,7 +502,9 @@ const EditBookForm = ({ id }) => {
               <label>Weight</label> <br />
               <InputText
                 value={formData.weight}
-                onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, weight: e.target.value })
+                }
                 className="w-100"
               />
             </div>
@@ -472,7 +515,9 @@ const EditBookForm = ({ id }) => {
               <Dropdown
                 value={formData.weightUnit}
                 options={["kg", "g", "lb", "oz"]}
-                onChange={(e) => setFormData({ ...formData, weightUnit: e.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, weightUnit: e.value })
+                }
                 className="w-100"
                 placeholder="Select a Unit"
               />

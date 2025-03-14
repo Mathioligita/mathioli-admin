@@ -1,5 +1,4 @@
-
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
@@ -13,13 +12,13 @@ import axios from "axios";
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable"; // For tables in PDF
-import "./BookDetail.css"
+import "./BookDetail.css";
 import Cookies from "js-cookie";
 const BookTable = () => {
   const [books, setBooks] = useState([]);
   const router = useRouter();
   // const accessToken = localStorage.getItem("accessToken");
-  const accessToken = Cookies.get("accessToken")
+  const accessToken = Cookies.get("accessToken");
   const [visible, setVisible] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
 
@@ -31,12 +30,13 @@ const BookTable = () => {
         setBooks(response.data.data.books);
       } catch (error) {
         console.error(error);
-      } 
+      }
     };
     fetchBooks();
   }, []);
 
   const handleDelete = async (slug) => {
+    const headers = { Authorization: `Bearer ${accessToken}` };
     try {
       const result = await Swal.fire({
         title: "Are you sure?",
@@ -48,7 +48,9 @@ const BookTable = () => {
         confirmButtonText: "Yes, delete it!",
       });
       if (result) {
-        const response = await axios.delete(`${API_BASE_URL}/book/${slug}`);
+        const response = await axios.delete(`${API_BASE_URL}/book/${slug}`, {
+          headers,
+        });
         if (response) {
           setBooks(books.filter((book) => book.slug !== slug));
         }
@@ -59,7 +61,7 @@ const BookTable = () => {
   };
 
   const handleEdit = (rowData) => {
-    router.push(`/dashboard/book/${rowData.slug}`)
+    router.push(`/dashboard/book/${rowData.slug}`);
     // setSelectedBook(rowData.slug);
     // setVisible(true);
   };
@@ -111,16 +113,18 @@ const BookTable = () => {
     );
   };
 
-
   //---------------------------------------------------------
   const checkboxbook = (rowData) => {
     return (
       <div className="form-check">
-      <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-      <label className="form-check-label" htmlFor="flexCheckDefault">
-        
-      </label>
-    </div>
+        <input
+          className="form-check-input"
+          type="checkbox"
+          value=""
+          id="flexCheckDefault"
+        />
+        <label className="form-check-label" htmlFor="flexCheckDefault"></label>
+      </div>
     );
   };
 
@@ -128,36 +132,59 @@ const BookTable = () => {
     <>
       <div className="p-5">
         <div className="d-flex" style={{ justifyContent: "space-between" }}>
-
           <div>
-            <Button label="Export to Excel" onClick={exportToExcel} className="mb-3"/>
-            <Button label="Export to PDF" onClick={exportToPDF} className="mb-3"/>
-            <Button label="Print PDF" onClick={handlePrint} className="mb-3"/>
+            <Button
+              label="Export to Excel"
+              onClick={exportToExcel}
+              className="mb-3"
+            />
+            <Button
+              label="Export to PDF"
+              onClick={exportToPDF}
+              className="mb-3"
+            />
+            <Button label="Print PDF" onClick={handlePrint} className="mb-3" />
           </div>
 
           <div>
-            <Button label="Create Book" onClick={() => router.push("/dashboard/book/create")} />
+            <Button
+              label="Create Book"
+              onClick={() => router.push("/dashboard/book/create")}
+            />
           </div>
         </div>
         <DataTable value={books}>
-          <Column headerStyle={{ width: "3rem" }} body={checkboxbook} />
+          {/* <Column headerStyle={{ width: "3rem" }} body={checkboxbook} /> */}
           <Column
             header="Title"
             body={(rowData) => (
-              <Link href={`/dashboard/book/${rowData.slug}`}>{rowData.title}</Link>
+              <Link href={`/dashboard/book/${rowData.slug}`}>
+                {rowData.title}
+              </Link>
             )}
           />
 
           <Column field="author" header="Author" />
           <Column field="genre" header="Genre" />
           <Column field="price" header="Price" />
-          <Column header="Active" body={activeButton} readOnly />
+          {/* <Column header="Active" body={activeButton} readOnly /> */}
           <Column
             header="Actions"
             body={(rowData) => (
-              <div className="d-flex " style={{ justifyContent: "space-around" }}>
-                <Button icon="pi pi-pencil" style={{ all: "unset  " }} onClick={() => handleEdit(rowData)} />
-                <Button icon="pi pi-trash" style={{ all: "unset" }} onClick={() => handleDelete(rowData.slug)} />
+              <div
+                className="d-flex "
+                style={{ justifyContent: "space-around" }}
+              >
+                <Button
+                  icon="pi pi-pencil"
+                  style={{ all: "unset  " }}
+                  onClick={() => handleEdit(rowData)}
+                />
+                <Button
+                  icon="pi pi-trash"
+                  style={{ all: "unset" }}
+                  onClick={() => handleDelete(rowData.slug)}
+                />
               </div>
             )}
           />
