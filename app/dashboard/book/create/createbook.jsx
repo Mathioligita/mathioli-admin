@@ -22,9 +22,10 @@ const BookForm = () => {
   const [formData, setFormData] = useState({
     title: "",
     author: "Mathioli",
-    authorBiography: "",
-    genre:
+    authorBiography:
       "Mathioli Gita is an attempt to reach the words of Guru Pujyashri Mathioli Saraswathy to the reading public. The books written by Her provide people with a guide to improve their lives and make it more meaningful.Her thoughts are interwoven with stories in each chapter to make the reading simple and easy to understand. Reflecting or contemplating on the stories and underlying principles, will transform a person from within and make it easy for us to understand life and its vicissitudes.",
+
+    genre: "",
     category: "",
     publishDate: null,
     publisher: "Mathioli",
@@ -33,7 +34,7 @@ const BookForm = () => {
     pages: "",
     description: "",
     price: "",
-    isHardCopyAvailable: false,
+    isHardCopyAvailable: true,
     isAudiobookAvailable: false,
     isEBookAvailable: false,
     books: [],
@@ -383,6 +384,22 @@ const BookForm = () => {
 
           <Row>
             <Col>
+              <div className=" d-flex">
+                <div className="">
+                  <InputSwitch
+                    checked={formData.isHardCopyAvailable}
+                    className="mr-3"
+                    onChange={(e) =>
+                      setFormData({ ...formData, isHardCopyAvailable: e.value })
+                    }
+                  />
+                </div>
+                <div className="">
+                  <label>Hard Copy Available</label> <br />
+                </div>
+              </div>
+            </Col>
+            <Col>
               <div className="d-flex">
                 <div className="">
                   <InputSwitch
@@ -417,22 +434,6 @@ const BookForm = () => {
                 </div>
               </div>
             </Col> */}
-            <Col>
-              <div className=" d-flex">
-                <div className="">
-                  <InputSwitch
-                    checked={formData.isHardCopyAvailable}
-                    className="mr-3"
-                    onChange={(e) =>
-                      setFormData({ ...formData, isHardCopyAvailable: e.value })
-                    }
-                  />
-                </div>
-                <div className="">
-                  <label>Hard Copy Available</label> <br />
-                </div>
-              </div>
-            </Col>
 
             <Col>
               <div className=" d-flex">

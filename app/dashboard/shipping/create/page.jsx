@@ -354,16 +354,15 @@ const ShippingRegion = () => {
         );
         Swal.fire("Shipping Updated");
       } else {
-        response = await axios.post(
+        const response = await axios.post(
           `${API_BASE_URL}/shippingregion`,
           formData,
           { headers }
         );
-        Swal.fire("Shipping Created");
-      }
-
-      if (response) {
-        window.location.href = "/dashboard/shipping";
+        if (response.data.success) {
+          Swal.fire("Shipping Created");
+          window.location.href = "/dashboard/shipping";
+        }
       }
     } catch (error) {
       console.error("Error saving region", error);

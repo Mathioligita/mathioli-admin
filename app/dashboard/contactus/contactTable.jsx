@@ -290,12 +290,12 @@ const ContactTable = () => {
           />
         </div>
         <div>
-          <Button
+          {/* <Button
             label=" Add Contact"
             icon="pi pi-plus"
             className="p-button-success p-button-rounded "
             onClick={() => router.push("/dashboard/contactus/create")}
-          />
+          /> */}
         </div>
       </div>
 

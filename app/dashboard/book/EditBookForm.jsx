@@ -143,11 +143,12 @@ const EditBookForm = ({ id }) => {
         pages: book.pages,
         description: book.description,
         price: book.price,
+        // audiobooks: book.audiobookUpload[0],
         isHardCopyAvailable: book.isHardCopyAvailable,
         isAudiobookAvailable: book.isAudiobookAvailable,
         isEBookAvailable: book.isEBookAvailable,
-        books: book.bookimage,
-        // audiobookPrice: book.audiobookUpload,
+        // books: book?.bookimage[0],
+        audiobookPrice: book.audiobookPrice,
         ebookPrice: book.EbookUpload,
         weightUnit: book?.weightUnit,
         weight: book?.weight,
@@ -177,8 +178,8 @@ const EditBookForm = ({ id }) => {
                 multiple
                 onChange={(e) => handleFileChange(e, "books")}
               />
-              {formData.books.map((file, index) => (
-                <div key={index}>{file.name}</div>
+              {formData?.books?.map((file, index) => (
+                <div key={index}>{file?.name}</div>
               ))}
             </div>
           </Col>
@@ -351,6 +352,21 @@ const EditBookForm = ({ id }) => {
 
         <Row>
           <Col>
+            <div className=" d-flex">
+              <div className="mr-3">
+                <InputSwitch
+                  checked={formData.isHardCopyAvailable}
+                  onChange={(e) =>
+                    setFormData({ ...formData, isHardCopyAvailable: e.value })
+                  }
+                />
+              </div>
+              <div className="">
+                <label>Hard Copy Available</label> <br />
+              </div>
+            </div>
+          </Col>
+          <Col>
             <div className="d-flex">
               <div className="">
                 <InputSwitch
@@ -366,7 +382,7 @@ const EditBookForm = ({ id }) => {
               </div>
             </div>
           </Col>
-          <Col>
+          {/* <Col>
             <div className="d-flex">
               <div className="">
                 <InputSwitch
@@ -381,22 +397,8 @@ const EditBookForm = ({ id }) => {
                 <label>EBook Available</label> <br />
               </div>
             </div>
-          </Col>
-          <Col>
-            <div className=" d-flex">
-              <div className="mr-3">
-                <InputSwitch
-                  checked={formData.isHardCopyAvailable}
-                  onChange={(e) =>
-                    setFormData({ ...formData, isHardCopyAvailable: e.value })
-                  }
-                />
-              </div>
-              <div className="">
-                <label>Hard Copy Available</label> <br />
-              </div>
-            </div>
-          </Col>
+          </Col> */}
+
           <Col>
             <div className=" d-flex">
               <div className="">
@@ -448,9 +450,9 @@ const EditBookForm = ({ id }) => {
               </div>
             </Col>
           )}
-          {formData?.isEBookAvailable && (
+          {/* {formData?.isEBookAvailable && (
             <Col sm={12} md={4}>
-              {/* <div className=" d-flex mb-3"> */}
+              <div className=" d-flex mb-3">
               <div className="">
                 <label>Upload Ebook Files</label>
                 <input
@@ -460,9 +462,9 @@ const EditBookForm = ({ id }) => {
                   onChange={(e) => handleFileChange(e, "ebooks")}
                 />
               </div>
-              {/* </div> */}
+              </div>
             </Col>
-          )}
+          )} */}
         </Row>
 
         <Row>
@@ -480,7 +482,7 @@ const EditBookForm = ({ id }) => {
               </div>
             </Col>
           )}
-          {formData?.isEBookAvailable && (
+          {/* {formData?.isEBookAvailable && (
             <Col>
               <div className=" ">
                 <label>EBook Price</label> <br />
@@ -493,7 +495,7 @@ const EditBookForm = ({ id }) => {
                 />
               </div>
             </Col>
-          )}
+          )} */}
         </Row>
 
         <Row>

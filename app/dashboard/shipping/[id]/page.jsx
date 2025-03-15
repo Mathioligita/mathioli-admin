@@ -406,9 +406,10 @@ const ShippingRegionEdit = () => {
             headers: { Authorization: `Bearer ${accessToken}` },
           }
         );
-        if (response.success) {
+        console.log(response, "response");
+        if (response.data.success) {
           Swal.fire("Shipping Updated");
-          window.location.href = "dashboard/shipping";
+          window.location.href = "/dashboard/shipping";
         }
       } else {
         const response = await axios.post(

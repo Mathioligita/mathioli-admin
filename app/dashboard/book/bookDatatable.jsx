@@ -52,6 +52,7 @@ const BookTable = () => {
           headers,
         });
         if (response) {
+          Swal.fire("Books delete SuccessFully");
           setBooks(books.filter((book) => book.slug !== slug));
         }
       }

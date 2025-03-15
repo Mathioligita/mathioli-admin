@@ -76,12 +76,25 @@ const Sidebar = () => {
   };
 
   return (
-    <div className={`sidebar ${isOpen ? "open" : "closed"}`} style={{borderRight:"1px solid #8080804f"}}>
+    <div
+      className={`sidebar ${isOpen ? "open" : "closed"}`}
+      style={{ borderRight: "1px solid #8080804f" }}
+    >
       <div className="d-flex justify-content-between align-items-center">
-      {isOpen ? <div className="text-center mt-2">
-          <img src="/svg/Final-Logo 2.png" className="ms-3" alt="" width={"180px"} />
-        </div> :null }
-        <i className="pi pi-align-justify toggle-button mt-3 fw-bold" onClick={toggleSidebar}></i>
+        {isOpen ? (
+          <div className="text-center mt-2">
+            <img
+              src="/svg/Final-Logo 2.png"
+              className="ms-3"
+              alt=""
+              width={"180px"}
+            />
+          </div>
+        ) : null}
+        <i
+          className="pi pi-align-justify toggle-button mt-3 fw-bold"
+          onClick={toggleSidebar}
+        ></i>
       </div>
       <ul className="layout-menu">
         {model.map((section, index) => (
@@ -118,16 +131,17 @@ const Sidebar = () => {
             <span className="layout-menuitem-text">Log out</span>
           </a>
         </ul>
-        {isOpen ?
-        <div className="book-image">
-          <img
-            src="../book.png"
-            alt="book"
-            className="img-fliud sidebar-footer-image"
-            loading="lazy"
-            width={"100px"}
-          />
-        </div>:null}
+        {isOpen ? (
+          <div className="book-image">
+            <img
+              src="/book.png"
+              alt="book"
+              className="img-fliud sidebar-footer-image"
+              loading="lazy"
+              width={"100px"}
+            />
+          </div>
+        ) : null}
       </ul>
     </div>
   );

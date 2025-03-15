@@ -432,18 +432,15 @@ export default function Profile() {
     phoneNumber: "",
   });
   const [file, setFile] = useState(null);
-  
 
   const accessToken = Cookies.get("accessToken");
 
   useEffect(() => {
     if (accessToken) {
-   
-        const headers = { Authorization: `Bearer ${accessToken}` };
-      
-    
+      const headers = { Authorization: `Bearer ${accessToken}` };
+
       axios
-        .get(`${API_BASE_URL}/admins/me`,{headers} )
+        .get(`${API_BASE_URL}/admins/me`, { headers })
         .then((response) => {
           setData(response.data.data);
           setForm({
@@ -486,7 +483,7 @@ export default function Profile() {
     // }
 
     axios
-      .patch(`${API_BASE_URL}/admins/me`, formData )
+      .patch(`${API_BASE_URL}/admins/me`, formData)
       .then((res) => {
         console.log(res);
 
@@ -519,17 +516,18 @@ export default function Profile() {
     <div>
       {data ? (
         <div>
-          <Card className="card">
+          <Card className="card mt-4">
             <ul className="flex">
               <li className="relative">
                 <img
-                  src={image || "default-image-url"} 
+                  src={image || "/book.png"}
                   alt={`${data.firstName} ${data.lastName}'s profile picture`}
                   width="120px"
                   className="border-circle w-6rem h-6rem m-2 bg-primary font-bold flex align-items-center justify-content-center"
                 />
                 <i
-                  className="pi pi-pen-to-square absolute bottom-0 right-0 m-3 bg-white "style={{ fontSize: '1.2rem',borderRadius:"50%" }}
+                  className="pi pi-pen-to-square absolute bottom-0 right-0 m-3 bg-white "
+                  style={{ fontSize: "1.2rem", borderRadius: "50%" }}
                   onClick={handleShow}
                 ></i>
               </li>
@@ -539,10 +537,11 @@ export default function Profile() {
                   <span className="ms-2">{data.lastName}</span>
                 </p>
                 <p className="font-normal text-base p-2">
-                  <span className="ms-5">
-<i className="pi pi-envelope m-2 "  />
-                    {data.email || "N/A"}</span> 
-                    {/* <i className="pi pi-address-book ms-5 m-2"/> */}
+                  <span className="">
+                    <i className="pi pi-envelope m-2 " />
+                    {data.email || "N/A"}
+                  </span>
+                  {/* <i className="pi pi-address-book ms-5 m-2"/> */}
                   {/* <span>{data.phoneNumber || "N/A"}</span> */}
                 </p>
               </li>
@@ -575,7 +574,8 @@ export default function Profile() {
                     </ul>
                   </div>
                   <div>
-                    <label htmlFor="firstName">First name: </label><br />
+                    <label htmlFor="firstName">First name: </label>
+                    <br />
                     <InputText
                       type="text"
                       id="firstName"
@@ -584,12 +584,12 @@ export default function Profile() {
                       value={form.firstName}
                       onChange={handleInputChange}
                     />
-                  
                   </div>
                   <div>
-                  <label htmlFor="lastName" className="ms-2">
-                      Last name:{" "} 
-                    </label><br/>
+                    <label htmlFor="lastName" className="ms-2">
+                      Last name:{" "}
+                    </label>
+                    <br />
                     <InputText
                       type="text"
                       id="lastName"
@@ -600,7 +600,8 @@ export default function Profile() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="email">Email: </label><br />
+                    <label htmlFor="email">Email: </label>
+                    <br />
                     <InputText
                       type="email"
                       id="email"
@@ -632,7 +633,6 @@ export default function Profile() {
                 </form>
               </div>
             </Card>
-            
           )}
         </div>
       ) : (

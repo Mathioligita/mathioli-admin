@@ -124,8 +124,6 @@
 //         </Form.Control.Feedback>
 //       </Form.Group>
 
-     
-
 //       <div className='text-end'>
 
 //         <Button className='mt-4 rounded-4 ' style={{ background: "hsla(150, 49%, 54%, 1)", border: "1px solid hsla(150, 49%, 54%, 1)" }} type="submit">Submit</Button>
@@ -150,18 +148,19 @@ import { useRouter } from "next/navigation";
 const EditContactForm = ({ id }) => {
   const [initialData, setInitialData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const accessToken = typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
+  const accessToken =
+    typeof window !== "undefined" ? localStorage.getItem("accessToken") : null;
   const router = useRouter();
 
   useEffect(() => {
     const fetchContact = async () => {
       try {
         const headers = { Authorization: `Bearer ${accessToken}` };
-        const response = await axios.get(`${API_BASE_URL}/contactus/${id}`, { headers });
+        const response = await axios.get(`${API_BASE_URL}/contactus/${id}`, {
+          headers,
+        });
         setInitialData(response?.data?.data);
         console.log(response.data.data);
-        
-        
 
         setLoading(false);
       } catch (error) {
@@ -173,7 +172,9 @@ const EditContactForm = ({ id }) => {
 
   const validationSchema = Yup.object({
     name: Yup.string().required("Name is required"),
-    email: Yup.string().email("Invalid email address").required("Email is required"),
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
     mobile: Yup.string()
       .matches(/^\d{10}$/, "Mobile number must be 10 digits")
       .required("Mobile number is required"),
@@ -192,9 +193,14 @@ const EditContactForm = ({ id }) => {
     onSubmit: async (values) => {
       try {
         const headers = { Authorization: `Bearer ${accessToken}` };
-        const response = await axios.patch(`${API_BASE_URL}/contactus/${id}`, values, { headers });
+        const response = await axios.patch(
+          `${API_BASE_URL}/contactus/${id}`,
+          values,
+          { headers }
+        );
         if (response.status === 200) {
           router.push("/dashboard/contactus");
+          Swal.fire("Contact Edited successfuly");
         }
       } catch (error) {
         console.error("Error updating contact:", error);
@@ -281,70 +287,94 @@ const EditContactForm = ({ id }) => {
     //     />
     //   </div>
     // </form>
-     <form onSubmit={formik.handleSubmit} className="p-4">
-          <div className="mb-3">
-            <label htmlFor="name" className="block mb-2">Name</label>
-            <InputText
-              id="name"
-              name="name"
-              value={formik.values.name}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              className={`w-full p-inputtext-lg ${formik.touched.name && formik.errors.name ? 'p-invalid' : ''}`}
-            />
-            {formik.touched.name && formik.errors.name && <small className="p-error">{formik.errors.name}</small>}
-          </div>
-    
-          <div className="mb-3">
-            <label htmlFor="email" className="block mb-2">Email</label>
-            <InputText
-              id="email"
-              name="email"
-              type="email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              className={`w-full p-inputtext-lg ${formik.touched.email && formik.errors.email ? 'p-invalid' : ''}`}
-            />
-            {formik.touched.email && formik.errors.email && <small className="p-error">{formik.errors.email}</small>}
-          </div>
-    
-          <div className="mb-3">
-            <label htmlFor="mobile" className="block mb-2">Mobile Number</label>
-            <InputText
-              id="mobile"
-              name="mobile"
-              value={formik.values.mobile}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              className={`w-full p-inputtext-lg ${formik.touched.mobile && formik.errors.mobile ? 'p-invalid' : ''}`}
-            />
-            {formik.touched.mobile && formik.errors.mobile && <small className="p-error">{formik.errors.mobile}</small>}
-          </div>
-    
-          <div className="mb-3">
-            <label htmlFor="message" className="block mb-2">Message</label>
-            <InputTextarea
-              id="message"
-              name="message"
-              rows={3}
-              value={formik.values.message}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              className={`w-full p-inputtext-lg ${formik.touched.message && formik.errors.message ? 'p-invalid' : ''}`}
-            />
-            {formik.touched.message && formik.errors.message && <small className="p-error">{formik.errors.message}</small>}
-          </div>
-    
-          <div className="ms-auto">
-            <Button
-              type="submit"
-              label="Submit"
-              icon="pi pi-check"
-              className="p-button-rounded p-button-success"
-            />
-          </div>
-        </form>
+    <form onSubmit={formik.handleSubmit} className="p-4">
+      <div className="mb-3">
+        <label htmlFor="name" className="block mb-2">
+          Name
+        </label>
+        <InputText
+          id="name"
+          name="name"
+          value={formik.values.name}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          className={`w-full p-inputtext-lg ${
+            formik.touched.name && formik.errors.name ? "p-invalid" : ""
+          }`}
+        />
+        {formik.touched.name && formik.errors.name && (
+          <small className="p-error">{formik.errors.name}</small>
+        )}
+      </div>
+
+      <div className="mb-3">
+        <label htmlFor="email" className="block mb-2">
+          Email
+        </label>
+        <InputText
+          id="email"
+          name="email"
+          type="email"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          className={`w-full p-inputtext-lg ${
+            formik.touched.email && formik.errors.email ? "p-invalid" : ""
+          }`}
+        />
+        {formik.touched.email && formik.errors.email && (
+          <small className="p-error">{formik.errors.email}</small>
+        )}
+      </div>
+
+      <div className="mb-3">
+        <label htmlFor="mobile" className="block mb-2">
+          Mobile Number
+        </label>
+        <InputText
+          id="mobile"
+          name="mobile"
+          value={formik.values.mobile}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          className={`w-full p-inputtext-lg ${
+            formik.touched.mobile && formik.errors.mobile ? "p-invalid" : ""
+          }`}
+        />
+        {formik.touched.mobile && formik.errors.mobile && (
+          <small className="p-error">{formik.errors.mobile}</small>
+        )}
+      </div>
+
+      <div className="mb-3">
+        <label htmlFor="message" className="block mb-2">
+          Message
+        </label>
+        <InputTextarea
+          id="message"
+          name="message"
+          rows={3}
+          value={formik.values.message}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          className={`w-full p-inputtext-lg ${
+            formik.touched.message && formik.errors.message ? "p-invalid" : ""
+          }`}
+        />
+        {formik.touched.message && formik.errors.message && (
+          <small className="p-error">{formik.errors.message}</small>
+        )}
+      </div>
+
+      <div className="ms-auto">
+        <Button
+          type="submit"
+          label="Submit"
+          icon="pi pi-check"
+          className="p-button-rounded p-button-success"
+        />
+      </div>
+    </form>
   );
 };
 
