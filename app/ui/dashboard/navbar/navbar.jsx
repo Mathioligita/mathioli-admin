@@ -44,15 +44,18 @@ import UserContext from "../../context/usecontext";
 
 const Navbar = () => {
   const [query, setQuery] = useState("");
-  const {dashboardData}=useContext(UserContext)
-  console.log(dashboardData,"dashboarddata")
+  const { dashboardData } = useContext(UserContext);
+  console.log(dashboardData, "dashboarddata");
   return (
-    <div className="layout-topbar " style={{borderBottom:"1px solid #8080804f"}}>
+    <div
+      className="layout-topbar "
+      style={{ borderBottom: "1px solid #8080804f" }}
+    >
       <div className=""></div>
 
       <div className="d-flex align-items-center align-self-center w-100">
-        <div className="flex items-center Search-bar-btn">
-          <svg
+        {/* <div className="flex items-center Search-bar-btn"> */}
+        {/* <svg
             className="icons-Search"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -65,15 +68,15 @@ const Navbar = () => {
               strokeWidth={2}
               d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 3 7.5 7.5 0 0016.65 16.65z"
             />
-          </svg>
-          <input
+          </svg> */}
+        {/* <input
             type="text"
             placeholder="Search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             className="ml-2 Search"
-          />
-        </div>
+          /> */}
+        {/* </div> */}
         <div className={classNames("layout-topbar-menu")}>
           {/* <Link href="/dashboard/profile">
                                 profile
@@ -85,7 +88,7 @@ const Navbar = () => {
                             </Link> */}
 
           <div className="flex items-center space-x-4 p-2">
-            <button className="relative mr-2 bell-btn">🔔</button>
+            {/* <button className="relative mr-2 bell-btn">🔔</button> */}
 
             <div className="relative ">
               <Link href="/dashboard/profile">
@@ -95,7 +98,9 @@ const Navbar = () => {
                   className="flex items-center align-items-center profiel-btn"
                 >
                   <span className="text-xl">🧑🏼‍💼</span>
-                  <span className="ml-2 text-gray-700">{dashboardData?.firstName}</span>
+                  <span className="ml-2 text-gray-700">
+                    {dashboardData?.firstName}
+                  </span>
                 </button>
               </Link>
             </div>

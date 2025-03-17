@@ -282,7 +282,7 @@ const ContactTable = () => {
       <div className="mb-3 flex flex-wrap justify-content-between">
         <div>
           <InputText
-            placeholder="Search by Name, Email, or Mobile No"
+            placeholder="Search by Name, Email"
             value={search}
             style={{ fontSize: "12px" }}
             onChange={(e) => setSearch(e.target.value)}

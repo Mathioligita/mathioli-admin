@@ -1,5 +1,6 @@
+
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { InputText } from "primereact/inputtext";
 import { Calendar } from "primereact/calendar";
 import { InputSwitch } from "primereact/inputswitch";
@@ -15,9 +16,12 @@ import { API_BASE_URL } from "../../utlis";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import "./createbook.css";
+import AudioPlayer from "react-h5-audio-player";
+import "react-h5-audio-player/lib/styles.css";
 
 const EditBookForm = ({ id }) => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   const accessToken = Cookies.get("accessToken");
   const router = useRouter();
   const [categories, setCategories] = useState([]);
@@ -47,6 +51,8 @@ const EditBookForm = ({ id }) => {
     weightUnit: "kg",
     weight: "",
   });
+
+  const audioRef = useRef(null);
 
   const handleFileUpload = (files, setter) => {
     setFormData((prevFormData) => ({
@@ -143,17 +149,17 @@ const EditBookForm = ({ id }) => {
         pages: book.pages,
         description: book.description,
         price: book.price,
-        // audiobooks: book.audiobookUpload[0],
         isHardCopyAvailable: book.isHardCopyAvailable,
         isAudiobookAvailable: book.isAudiobookAvailable,
         isEBookAvailable: book.isEBookAvailable,
-        // books: book?.bookimage[0],
         audiobookPrice: book.audiobookPrice,
         ebookPrice: book.EbookUpload,
         weightUnit: book?.weightUnit,
         weight: book?.weight,
         awardWinningBook: book?.awardWinningBook,
         newArrival: book?.newArrival,
+        books: book?.bookimage || [],
+        audiobooks: book?.audiobookUpload || [],
       });
     } catch (error) {
       console.error("Error fetching book:", error);
@@ -164,6 +170,12 @@ const EditBookForm = ({ id }) => {
     fetchCategories();
     fetchBook();
   }, [id]);
+
+  const handleTimeUpdate = () => {
+    if (audioRef.current.audio.current.currentTime > 30) {
+      setIsDisabled(true);
+    }
+  };
 
   return (
     <div className="p-5 m-2">
@@ -382,23 +394,6 @@ const EditBookForm = ({ id }) => {
               </div>
             </div>
           </Col>
-          {/* <Col>
-            <div className="d-flex">
-              <div className="">
-                <InputSwitch
-                  checked={formData.isEBookAvailable}
-                  onChange={(e) =>
-                    setFormData({ ...formData, isEBookAvailable: e.value })
-                  }
-                  className="mr-3"
-                />
-              </div>
-              <div className="">
-                <label>EBook Available</label> <br />
-              </div>
-            </div>
-          </Col> */}
-
           <Col>
             <div className=" d-flex">
               <div className="">
@@ -436,35 +431,29 @@ const EditBookForm = ({ id }) => {
         <Row>
           {formData?.isAudiobookAvailable && (
             <Col sm={12} md={4}>
-              <div className="mb-3">
-                <label>Upload Audiobook Files</label>
-                <input
-                  type="file"
-                  accept="audio/*"
-                  multiple
-                  onChange={(e) => handleFileChange(e, "audiobooks")}
-                />
-                {formData?.audiobooks?.map((file, index) => (
-                  <div key={index}>{file.name}</div>
-                ))}
+              <div className="d-flex">
+                <div className="mb-3">
+                  <label>Upload Audiobook Files</label>
+                  <input
+                    type="file"
+                    accept="audio/*"
+                    multiple
+                    onChange={(e) => handleFileChange(e, "audiobooks")}
+                  />
+                  {formData?.audiobooks?.map((file, index) => (
+                    <div key={index}>{file.name}</div>
+                  ))}
+                </div>
+                <div>
+                  <Button
+                    label="Preview"
+                    onClick={() => setIsPopupVisible(true)}
+                    className="p-button-secondary"
+                  />
+                </div>
               </div>
             </Col>
           )}
-          {/* {formData?.isEBookAvailable && (
-            <Col sm={12} md={4}>
-              <div className=" d-flex mb-3">
-              <div className="">
-                <label>Upload Ebook Files</label>
-                <input
-                  type="file"
-                  accept=".pdf,.epub"
-                  multiple
-                  onChange={(e) => handleFileChange(e, "ebooks")}
-                />
-              </div>
-              </div>
-            </Col>
-          )} */}
         </Row>
 
         <Row>
@@ -482,20 +471,6 @@ const EditBookForm = ({ id }) => {
               </div>
             </Col>
           )}
-          {/* {formData?.isEBookAvailable && (
-            <Col>
-              <div className=" ">
-                <label>EBook Price</label> <br />
-                <InputText
-                  value={formData.ebookPrice}
-                  onChange={(e) =>
-                    setFormData({ ...formData, ebookPrice: e.target.value })
-                  }
-                  className="w-100"
-                />
-              </div>
-            </Col>
-          )} */}
         </Row>
 
         <Row>
@@ -538,6 +513,55 @@ const EditBookForm = ({ id }) => {
           />
         </div>
       </div>
+
+      {/* Popup for Image and Audio Preview */}
+      {isPopupVisible && (
+        <div className="popup">
+          <div className="popup-contents">
+            <div className="d-flex">
+              <div className="p-2">
+                <div className="d-flex">
+                  <div>
+                    <img
+                      src={formData.books[0]}
+                      alt=""
+                      style={{
+                        height: "100px",
+                        objectFit: "cover",
+                        borderRadius: "15px",
+                        padding: "2px",
+                      }}
+                    />
+                  </div>
+                  <div className="my-auto">
+                    <h4 className="m-2">{formData.title}</h4>
+                  </div>
+                </div>
+              </div>
+              <div
+                style={{
+                  pointerEvents: isDisabled ? "none" : "auto",
+                  opacity: isDisabled ? 0.5 : 1,
+                }}
+                className="w-50 ms-auto mt-auto"
+              >
+                <AudioPlayer
+                  ref={audioRef}
+                  autoPlay
+                  src={formData.audiobooks[0]}
+                  onPlay={(e) => console.log("onPlay")}
+                  onListen={handleTimeUpdate} // Track time and disable after 30 sec
+                  controls
+                  className="w-100"
+                />
+              </div>
+              <div onClick={() => setIsPopupVisible(false)} className="my-auto">
+                <i className="pi pi-times ms-4 fw-1"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

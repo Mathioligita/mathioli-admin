@@ -46,11 +46,11 @@ const Sidebar = () => {
           icon: "fa-solid fa-quote-left",
           to: "/dashboard/quote",
         },
-        {
-          label: "Shipping",
-          icon: "fa-solid fa-truck",
-          to: "/dashboard/shipping",
-        },
+        // {
+        //   label: "Shipping",
+        //   icon: "fa-solid fa-truck",
+        //   to: "/dashboard/shipping",
+        // },
         {
           label: "Contact",
           icon: "fa-solid fa-address-book",
