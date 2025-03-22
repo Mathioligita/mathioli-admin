@@ -10,6 +10,9 @@
     /* max-width: 800px; */
     margin: 0 auto;
   }
+  .p-inputswitch.p-highlight .p-inputswitch-slider {
+    background: #1d5755 !important;
+  }
   
   .book-image img {
     max-width: 100%;

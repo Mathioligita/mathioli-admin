@@ -62,11 +62,10 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-
 }
 
 .layout-topbar {
-  height: 5rem;
+  height: 4rem;
   padding: 0 2rem 0 1rem;
   /* position: fixed; */
   top: 0;
@@ -99,7 +98,6 @@
 .layout-content-wrapper {
   margin-left: 17rem;
   transition: margin-left 0.3s ease;
-  
 }
 
 .layout-content {
@@ -138,21 +136,23 @@
 * {
   text-decoration: none;
   /* overflow-y: hidden; */
-
+}
+.p-button-rounded  .p-component{
+  background: "white" !important;
 }
 
 button.p-button.p-component {
-  background: #1D5755;
+  background: #1d5755;
   color: #fff;
-  border-radius: 10px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-  border: 1px solid #1D5755;
+  border-radius: 6px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  border: 1px solid #1d5755;
 }
 
 span.p-button-icon.p-c.pi.pi-eye,
 span.p-button-icon.p-c.pi.pi-pencil,
-span.p-button-icon.p-c.pi.pi-trash
- {
+span.p-button-icon.p-c.pi.pi-trash {
   background: #f2f2f2 !important;
   color: #1e1e1e !important;
   padding: 10px !important;

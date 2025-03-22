@@ -29,6 +29,7 @@
   color: var(--text-color);
   cursor: pointer;
   text-decoration: none;
+  margin-top: 12px;
 
   i {
     margin-right: 0.7rem;
@@ -99,18 +100,23 @@
       padding: 12px;
       text-decoration: none;
       // left: 40px;
-      margin: 0 0 0 30px;
+      // margin: 0 0 0 30px;
 
       span {
         // display: none;
         font-family: "Inter";
       }
-
+      .active {
+        background-color: #1d5755;
+      }
+      .active :hover {
+        background: #1d5755 !important;
+      }
       // border-radius: $borderRadius;
       // transition: background-color $transitionDuration, box-shadow $transitionDuration;
 
       .layout-menuitem-icon {
-        margin-right: 0.5rem;
+        // margin-right: 0.5rem;
       }
 
       .layout-submenu-toggler {
@@ -131,13 +137,13 @@
       }
 
       &:hover {
-        background-color: #1d5755;
+        background-color: #1d575546;
         color: White;
         display: block;
         // width: 192px;
-        border-radius: 14px;
+        // border-radius: 14px;
         // left: 40px;
-        margin: 0 0 0 30px;
+        // margin: 0 0 0 30px;
       }
 
       &:focus {
@@ -218,8 +224,8 @@
 .sidebar {
   transition: width 0.3s;
   &.closed {
-    width: 80px;
-    margin-left: 12px;
+    // width: 100px;
+    // margin-left: 12px;
 
     .layout-menuitem-root-text,
     .layout-menuitem-text {
@@ -232,15 +238,16 @@
       margin: 0 !important;
       padding: 12px;
       font-family: "Inter";
+      margin-top: 12px !important;
 
       font-size: larger;
       &:hover {
-        background-color: #1d5755;
+        background-color: #1d575567;
         color: White;
         display: block;
-        width: 50px;
+        // width: 50px;
         // height: 12px;
-        border-radius: 14px;
+        // border-radius: 14px;
 
         // left: 40px;
         // margin: 0 0 0 30px;
@@ -251,10 +258,24 @@
     width: 250px;
   }
 }
+.toggle-button {
+  position: absolute !important;
+  // background: white;
+  // position: absolute !important;
+  right: -20px;
+  top: 120px;
+  border-radius: 50%;
+  z-index: 9999;
+}
 
 .toggle-button {
   @media (max-width: 1024px) {
     display: block;
   }
   margin: 10px;
+}
+.active {
+  background-color: #1d5755;
+  color: #fff !important;
+  // border-radius: 5px;
 }

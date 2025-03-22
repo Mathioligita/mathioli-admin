@@ -41,17 +41,30 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 import "./navba.scss";
 import { useState } from "react";
 import UserContext from "../../context/usecontext";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const [query, setQuery] = useState("");
   const { dashboardData } = useContext(UserContext);
   console.log(dashboardData, "dashboarddata");
+  const location = window.location.pathname;
+  console.log(location, "locations");
   return (
     <div
       className="layout-topbar "
       style={{ borderBottom: "1px solid #8080804f" }}
     >
-      <div className=""></div>
+      {console.log(
+        location === "/dashboard"
+          ? location.split("/")[1]
+          : location.split("/")[2],
+        "dashboard"
+      )}
+      <div className="">
+        <h5 style={{ fontFamily: "Poppins", textTransform: "capitalize" }}>
+          {location == "/dashboard" ? "Dashboard" : location.split("/")[2]}
+        </h5>
+      </div>
 
       <div className="d-flex align-items-center align-self-center w-100">
         {/* <div className="flex items-center Search-bar-btn"> */}
@@ -87,8 +100,8 @@ const Navbar = () => {
                                 />
                             </Link> */}
 
-          <div className="flex items-center space-x-4 p-2">
-            {/* <button className="relative mr-2 bell-btn">🔔</button> */}
+          {/* <div className="flex items-center space-x-4 p-2">
+            <button className="relative mr-2 bell-btn">🔔</button>
 
             <div className="relative ">
               <Link href="/dashboard/profile">
@@ -104,7 +117,7 @@ const Navbar = () => {
                 </button>
               </Link>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

@@ -1,4 +1,6 @@
-
+.p-inputswitch.p-highlight .p-inputswitch-slider {
+  background: #1d5755 !important;
+}
 
 // .container {
 //   margin: 20px;
@@ -108,7 +110,6 @@
 // .custom-modal-content {
 //   padding: 16px;
 // }
-
 
 // @keyframes fadeIn {
 //   from {
@@ -321,7 +322,6 @@ h1 {
   color: #27ae60;
 }
 
-
 // switch
 .switch {
   position: relative;
@@ -330,7 +330,7 @@ h1 {
   height: 34px;
 }
 
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -344,8 +344,8 @@ h1 {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .slider:before {
@@ -356,17 +356,16 @@ h1 {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: #34C759;
+  background-color: #34c759;
 }
 
-
 input:focus + .slider {
-  box-shadow: 0 0 1px #34C759;
+  box-shadow: 0 0 1px #34c759;
 }
 
 input:checked + .slider:before {
@@ -384,7 +383,7 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-.form-check-input[type=checkbox]{
+.form-check-input[type="checkbox"] {
   border-radius: 100%;
 }
 

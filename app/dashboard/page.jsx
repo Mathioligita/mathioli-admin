@@ -945,7 +945,7 @@ const Dashboardpage = () => {
       case "yearly":
         return dashboard?.[key]?.yearly || 0;
       default:
-        return dashboard?.overview?.[key] || 0;
+      // return dashboard?.overview?.[key] || 0;
     }
   };
 
@@ -1041,7 +1041,6 @@ const Dashboardpage = () => {
         borderColor: dashboard?.charts?.barChart?.yearlyRevenue?.color,
         fill: false,
       },
-     
     ],
   };
 
@@ -1093,7 +1092,7 @@ const Dashboardpage = () => {
                 style={{ width: "100%", objectFit: "cover" }}
               />
             </div>
-            <div>
+            <div className="ms-3">
               <h3 style={{ fontWeight: "800" }}>{getFilteredData("orders")}</h3>
               <p>Total Orders</p>
               <span className="stat-percentage" style={{ color: "green" }}>
@@ -1132,7 +1131,7 @@ const Dashboardpage = () => {
                 style={{ width: "100%", objectFit: "cover" }}
               />
             </div>
-            <div>
+            <div className="ms-3">
               <h3 style={{ fontWeight: "800" }}>
                 {getFilteredData("deliveries")}
               </h3>
@@ -1168,12 +1167,12 @@ const Dashboardpage = () => {
               }}
             >
               <img
-                src="/Group 122.png"
+                src="/svg/increase 1.png"
                 alt=""
                 style={{ width: "100%", objectFit: "cover" }}
               />
             </div>
-            <div>
+            <div className="ms-3">
               <h3 style={{ fontWeight: "800" }}>
                 {getFilteredData("revenue")}
               </h3>
@@ -1209,12 +1208,12 @@ const Dashboardpage = () => {
               }}
             >
               <img
-                src="/Group 82.png"
+                src="/svg/book 1.png"
                 alt=""
                 style={{ width: "100%", objectFit: "cover" }}
               />
             </div>
-            <div>
+            <div className="ms-3">
               <h3 style={{ fontWeight: "800" }}>
                 {dashboard?.overview?.totalBooks || 0}
               </h3>
@@ -1250,12 +1249,12 @@ const Dashboardpage = () => {
               }}
             >
               <img
-                src="/Group 82.png"
+                src="/svg/group 1.png"
                 alt=""
                 style={{ width: "100%", objectFit: "cover" }}
               />
             </div>
-            <div>
+            <div className="ms-3">
               <h3 style={{ fontWeight: "800" }}>
                 {dashboard?.overview?.totalUsers || 0}
               </h3>

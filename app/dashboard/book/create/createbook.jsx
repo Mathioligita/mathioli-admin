@@ -44,6 +44,7 @@ const BookForm = () => {
     ebookPrice: "",
     weightUnit: "kg",
     weight: "",
+    slug: "",
   });
 
   const handleFileUpload = (files, setter) => {
@@ -124,6 +125,7 @@ const BookForm = () => {
           ebookPrice: "",
           weightUnit: "kg",
           weight: "",
+          slug: "",
         });
       } else {
         Swal.fire("Error creating book");
@@ -149,11 +151,13 @@ const BookForm = () => {
   }, []);
 
   return (
-    <div>
+    <div className="p-5 m-2">
+      <div onClick={() => window.history.back("/")}>
+        <i className="pi pi-arrow-left"></i> Back
+      </div>
       <div className="m-2">
-        <h4>Create Book</h4>
-
-        <div className="">
+        <div className="m-auto" style={{ maxWidth: "1000px" }}>
+          <h4>Create Book</h4>
           <Row>
             <Col sm={12} md={12}>
               <div className="">
@@ -216,21 +220,21 @@ const BookForm = () => {
             </Col>
             <Col>
               <div className=" ">
-                <label>Author</label> <br />
+                <label>Slug</label> <br />
                 <InputText
-                  value={formData.author}
+                  value={formData.slug}
                   onChange={(e) =>
-                    setFormData({ ...formData, author: e.target.value })
+                    setFormData({ ...formData, slug: e.target.value })
                   }
                   className="w-100"
-                  placeholder="Enter author name"
+                  placeholder="Add the Slug name"
                 />
               </div>
             </Col>
           </Row>
 
           <Row>
-            <Col>
+            {/* <Col>
               <div className=" ">
                 <label>Genre</label> <br />
                 <InputText
@@ -240,6 +244,21 @@ const BookForm = () => {
                   }
                   className="w-100"
                   placeholder="Enter genre"
+                />
+              </div>
+            </Col> */}
+
+            <Col>
+              <div className=" ">
+                <label>Category</label> <br />
+                <Dropdown
+                  value={formData?.category}
+                  options={categories.map((item) => item.name)}
+                  onChange={(e) =>
+                    setFormData({ ...formData, category: e.value })
+                  }
+                  className="w-100"
+                  placeholder="Select a Category"
                 />
               </div>
             </Col>
@@ -261,15 +280,14 @@ const BookForm = () => {
           <Row>
             <Col>
               <div className=" ">
-                <label>Category</label> <br />
-                <Dropdown
-                  value={formData?.category}
-                  options={categories.map((item) => item.name)}
+                <label>Author</label> <br />
+                <InputText
+                  value={formData.author}
                   onChange={(e) =>
-                    setFormData({ ...formData, category: e.value })
+                    setFormData({ ...formData, author: e.target.value })
                   }
                   className="w-100"
-                  placeholder="Select a Category"
+                  placeholder="Enter author name"
                 />
               </div>
             </Col>

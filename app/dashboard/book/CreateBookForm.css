@@ -199,3 +199,6 @@
     object-fit: contain;
   }
 }
+.p-inputswitch.p-highlight .p-inputswitch-slider {
+  background: #1d5755 !important;
+}

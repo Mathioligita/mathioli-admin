@@ -66,18 +66,18 @@
 //   };
 
 //   const handleSubmit = async () => {
-//     const payload = new FormData();
-//     Object.keys(formData).forEach((key) => {
-//       if (formData[key]) {
-//         if (Array.isArray(formData[key])) {
-//           formData[key].forEach((file, index) => {
-//             payload.append(`${key}[${index}]`, file);
-//           });
-//         } else {
-//           payload.append(key, formData[key]);
-//         }
-//       }
-//     });
+// const payload = new FormData();
+// Object.keys(formData).forEach((key) => {
+//   if (formData[key]) {
+//     if (Array.isArray(formData[key])) {
+//       formData[key].forEach((file) => {
+//         payload.append(`${key}`, file);
+//       });
+//     } else {
+//       payload.append(key, formData[key]);
+//     }
+//   }
+// });
 
 //     try {
 //       const response = await axios.patch(
@@ -135,6 +135,7 @@
 //         headers,
 //       });
 //       const book = response.data.data.book[0];
+//       console.log(book,"book>>>>>>>>>>>>>>>>>>>>>>")
 //       setFormData({
 //         title: book.title,
 //         author: book.author,
@@ -175,6 +176,7 @@
 //       setIsDisabled(true);
 //     }
 //   };
+
 //   const handleRemoveImage = (index, setter) => {
 //     setFormData((prevFormData) => {
 //       const updatedFiles = prevFormData[setter].filter((_, i) => i !== index);
@@ -200,37 +202,47 @@
 //               />
 //               {formData.books.length > 0 && (
 //                 <div>
-//                   {formData.books.map((file, index) => (
-//                     <div
-//                       key={index}
-//                       style={{
-//                         position: "relative",
-//                         display: "inline-block",
-//                         margin: "5px",
-//                       }}
-//                     >
-//                       <img
-//                         src={URL.createObjectURL(file)}
-//                         alt={`Preview ${index}`}
-//                         style={{ width: "100px", height: "100px" }}
-//                       />
-//                       <button
-//                         style={{
-//                           position: "absolute",
-//                           top: "0",
-//                           right: "0",
-//                           background: "red",
-//                           color: "white",
-//                           border: "none",
-//                           borderRadius: "50%",
-//                           cursor: "pointer",
-//                         }}
-//                         onClick={() => handleRemoveImage(index, "books")}
-//                       >
-//                         X
-//                       </button>
-//                     </div>
-//                   ))}
+//                   {formData.books.map((file, index) => {
+//                     if (file instanceof File) {
+//                       const fileURL = URL.createObjectURL(file);
+//                       return (
+//                         <div
+//                           key={index}
+//                           style={{
+//                             position: "relative",
+//                             display: "inline-block",
+//                             margin: "5px",
+//                           }}
+//                         >
+//                           <img
+//                             src={formData.books}
+//                             alt={`Preview ${index}`}
+//                             style={{ width: "100px", height: "100px" }}
+//                           />
+//                           <button
+//                             style={{
+//                               position: "absolute",
+//                               top: "0",
+//                               right: "0",
+//                               background: "red",
+//                               color: "white",
+//                               border: "none",
+//                               borderRadius: "50%",
+//                               cursor: "pointer",
+//                             }}
+//                             onClick={() => handleRemoveImage(index, "books")}
+//                           >
+//                             X
+//                           </button>
+//                         </div>
+//                       );
+//                     } else {
+//                       console.error(
+//                         `File at index ${index} is not a valid File object.`
+//                       );
+//                       return null;
+//                     }
+//                   })}
 //                 </div>
 //               )}
 //             </div>
@@ -658,6 +670,7 @@ const EditBookForm = ({ id }) => {
     ebookPrice: "",
     weightUnit: "kg",
     weight: "",
+    slug: "",
   });
 
   const audioRef = useRef(null);
@@ -675,19 +688,31 @@ const EditBookForm = ({ id }) => {
   };
 
   const handleSubmit = async () => {
+    // const payload = new FormData();
+    // Object.keys(formData).forEach((key) => {
+    //   if (formData[key]) {
+    //     if (Array.isArray(formData[key])) {
+    //       formData[key].forEach((file) => {
+    //         payload.append(`${key}`, file);
+    //       });
+    //     } else {
+    //       payload.append(key, formData[key]);
+    //     }
+    //   }
+    // });
+
     const payload = new FormData();
     Object.keys(formData).forEach((key) => {
       if (formData[key]) {
         if (Array.isArray(formData[key])) {
-          formData[key].forEach((file, index) => {
-            payload.append(`${key}[${index}]`, file);
+          formData[key].forEach((file) => {
+            payload.append(`${key}`, file);
           });
         } else {
           payload.append(key, formData[key]);
         }
       }
     });
-
     try {
       const response = await axios.patch(
         `${API_BASE_URL}/book/${id}`,
@@ -744,6 +769,7 @@ const EditBookForm = ({ id }) => {
         headers,
       });
       const book = response.data.data.book[0];
+      console.log(book, "book>>>>>>>>>>>>>>>>>>>>>>");
       setFormData({
         title: book.title,
         author: book.author,
@@ -766,8 +792,9 @@ const EditBookForm = ({ id }) => {
         weight: book?.weight,
         awardWinningBook: book?.awardWinningBook,
         newArrival: book?.newArrival,
-        books: book?.bookimage.map((i) => i) || [],
+        books: book?.bookimage || [],
         audiobooks: book?.audiobookUpload || [],
+        slug: book?.slug,
       });
     } catch (error) {
       console.error("Error fetching book:", error);
@@ -797,7 +824,10 @@ const EditBookForm = ({ id }) => {
 
   return (
     <div className="p-5 m-2">
-      <div className="">
+      <div onClick={() => window.history.back("/")}>
+        <i className="pi pi-arrow-left"></i> Back
+      </div>
+      <div className=" m-auto" style={{ maxWidth: "1000px" }}>
         <Row>
           <Col sm={12} md={12}>
             <div className="">
@@ -811,45 +841,41 @@ const EditBookForm = ({ id }) => {
               {formData.books.length > 0 && (
                 <div>
                   {formData.books.map((file, index) => {
-                    if (file instanceof File) {
-                      const fileURL = URL.createObjectURL(file);
-                      return (
-                        <div
-                          key={index}
+                    const fileURL =
+                      typeof file === "string"
+                        ? file
+                        : URL.createObjectURL(file);
+                    return (
+                      <div
+                        key={index}
+                        style={{
+                          position: "relative",
+                          display: "inline-block",
+                          margin: "5px",
+                        }}
+                      >
+                        <img
+                          src={fileURL}
+                          alt={`Preview ${index}`}
+                          style={{ width: "100px", height: "100px" }}
+                        />
+                        <button
                           style={{
-                            position: "relative",
-                            display: "inline-block",
-                            margin: "5px",
+                            position: "absolute",
+                            top: "0",
+                            right: "0",
+                            background: "red",
+                            color: "white",
+                            border: "none",
+                            borderRadius: "50%",
+                            cursor: "pointer",
                           }}
+                          onClick={() => handleRemoveImage(index, "books")}
                         >
-                          <img
-                            src={formData.books}
-                            alt={`Preview ${index}`}
-                            style={{ width: "100px", height: "100px" }}
-                          />
-                          <button
-                            style={{
-                              position: "absolute",
-                              top: "0",
-                              right: "0",
-                              background: "red",
-                              color: "white",
-                              border: "none",
-                              borderRadius: "50%",
-                              cursor: "pointer",
-                            }}
-                            onClick={() => handleRemoveImage(index, "books")}
-                          >
-                            X
-                          </button>
-                        </div>
-                      );
-                    } else {
-                      console.error(
-                        `File at index ${index} is not a valid File object.`
-                      );
-                      return null;
-                    }
+                          X
+                        </button>
+                      </div>
+                    );
                   })}
                 </div>
               )}
@@ -867,13 +893,14 @@ const EditBookForm = ({ id }) => {
               />
             </div>
           </Col>
+
           <Col>
             <div className=" ">
-              <label>Author</label> <br />
+              <label>Slug</label> <br />
               <InputText
-                value={formData.author}
+                value={formData.slug}
                 onChange={(e) =>
-                  setFormData({ ...formData, author: e.target.value })
+                  setFormData({ ...formData, slug: e.target.value })
                 }
                 className="w-100"
               />
@@ -882,7 +909,7 @@ const EditBookForm = ({ id }) => {
         </Row>
 
         <Row>
-          <Col>
+          {/* <Col>
             <div className=" ">
               <label>Genre</label> <br />
               <InputText
@@ -891,6 +918,20 @@ const EditBookForm = ({ id }) => {
                   setFormData({ ...formData, genre: e.target.value })
                 }
                 className="w-100"
+              />
+            </div>
+          </Col> */}
+          <Col>
+            <div className=" ">
+              <label>Category</label> <br />
+              <Dropdown
+                value={formData?.category}
+                options={categories.map((item) => item.name)}
+                onChange={(e) =>
+                  setFormData({ ...formData, category: e.value })
+                }
+                className="w-100"
+                placeholder="Select a Category"
               />
             </div>
           </Col>
@@ -911,15 +952,13 @@ const EditBookForm = ({ id }) => {
         <Row>
           <Col>
             <div className=" ">
-              <label>Category</label> <br />
-              <Dropdown
-                value={formData?.category}
-                options={categories.map((item) => item.name)}
+              <label>Author</label> <br />
+              <InputText
+                value={formData.author}
                 onChange={(e) =>
-                  setFormData({ ...formData, category: e.value })
+                  setFormData({ ...formData, author: e.target.value })
                 }
                 className="w-100"
-                placeholder="Select a Category"
               />
             </div>
           </Col>

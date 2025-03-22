@@ -9,13 +9,17 @@ import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
+import { Dialog } from "primereact/dialog";
 import "primereact/resources/themes/lara-light-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
+import OrdersGereateinvoice from "./OrdersGereateinvoice";
 
 const OrderTable = () => {
   const [orders, setOrders] = useState([]);
   const [search, setSearch] = useState("");
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const router = useRouter();
   const accessToken = localStorage.getItem("accessToken");
 
@@ -114,21 +118,68 @@ const OrderTable = () => {
     }
   };
 
+  const handleSubmit = async (rowData) => {
+    console.log(rowData, "rowdata>>>>>>>>>>>>>>>");
+    const lineItems = rowData?.orderItems?.map((item) => ({
+      name: item.book.title,
+      description: `Book by ${item.book.author}`,
+      amount: item.book.price,
+      currency: "INR",
+      quantity: item.quantity,
+    }));
+
+    const payload = {
+      orderId: rowData?.orderId,
+      paymentId: rowData?.razorpayPaymentId,
+      amount: rowData?.orderTotal,
+      currency: "INR",
+      description: "Invoice for Razorpay Payment",
+      customer: {
+        name: `${rowData?.shippingAddress?.name}`,
+        email: rowData?.shippingAddress?.email,
+        contact: rowData?.shippingAddress?.phone,
+        address: rowData?.shippingAddress?.address,
+        city: rowData?.shippingAddress?.city,
+        state: rowData?.shippingAddress?.state,
+        pincode: rowData?.shippingAddress?.postalCode,
+        country: rowData?.shippingAddress?.country,
+      },
+      lineItems: lineItems,
+      notes: {
+        additional_info: "Any additional information related to the invoice",
+      },
+    };
+
+    console.log(payload, "payload");
+
+    const headers = { Authorization: `Bearer ${accessToken}` };
+    const response = await axios.post(
+      `${API_BASE_URL}/admin/order/invoice`,
+      { payload },
+      { headers }
+    );
+    if (response) {
+      const response = await axios.get(rowData.invoiceFile, {
+        responseType: "blob",
+      });
+      const file = new Blob([response.data], { type: "application/pdf" });
+      const fileURL = URL.createObjectURL(file);
+
+      // Open the PDF in a new window
+      window.open(fileURL);
+    }
+  };
+
   const orderStatusOptions = [
     { label: "Completed", value: "Completed" },
     { label: "Processing", value: "Processing" },
     { label: "Delivered", value: "Delivered" },
-    // { label: "Delivered", value: "Delivered" },
     { label: "Cancel", value: "Cancel" },
   ];
 
   const paymentStatusOptions = [
     { label: "Payment Pending", value: "Payment Pending" },
     { label: "Payment Success", value: "Payment success" },
-    // { label: "Processing", value: "Processing" },
-    // { label: "Shipped", value: "Shipped" },
-    // { label: "Delivered", value: "Delivered" },
-    // { label: "Cancel", value: "Cancel" },
   ];
 
   // Order Status Dropdown
@@ -156,13 +207,16 @@ const OrderTable = () => {
   // Action Buttons
   const actionTemplate = (rowData) => (
     <div className="flex gap-2">
-      {/* <Button
+      <Button
         icon="pi pi-eye"
         style={{ all: "unset" }}
         className="p-button-rounded p-button-info"
-        onClick={() => router.push(`/dashboard/orders/${rowData._id}`)}
+        onClick={() => {
+          setSelectedOrder(rowData);
+          setShowModal(true);
+        }}
       />
-      <Button
+      {/* <Button
         icon="pi pi-trash"
         style={{ all: "unset" }}
         className="p-button-rounded p-button-danger"
@@ -170,19 +224,94 @@ const OrderTable = () => {
       /> */}
     </div>
   );
+  const actionTemplates = (rowData) => (
+    <div className="flex gap-2">
+      {/* <Button
+        icon="pi pi-trash"
+        style={{ all: "unset" }}
+        className="p-button-rounded p-button-danger"
+        onClick={() => handleDelete(rowData.orderId)}
+      /> */}
+
+      {rowData?.razorpayPaymentId && (
+        <Button
+          style={{ all: "unset" }}
+          icon="pi pi-print"
+          onClick={() => handleSubmit(rowData)}
+        >
+          {/* <OrdersGereateinvoice rowData={rowData} handleSubmit={handleSubmit} /> */}
+        </Button>
+      )}
+    </div>
+  );
+
+  // Order Details Modal
+  const orderDetailsModal = () => (
+    <Dialog
+      header="Order Details"
+      visible={showModal}
+      style={{ width: "50vw" }}
+      onHide={() => setShowModal(false)}
+    >
+      {selectedOrder && (
+        <div>
+          <p>
+            <strong>Order ID:</strong> {selectedOrder.orderId}
+          </p>
+          <p>
+            <strong>Customer Email:</strong> {selectedOrder.user.email}
+          </p>
+          <p>
+            <strong>Total Amount:</strong> ₹{selectedOrder.orderTotal}
+          </p>
+          <p>
+            <strong>Payment Status:</strong> {selectedOrder.paymentStatus}
+          </p>
+          <p>
+            <strong>Order Status:</strong> {selectedOrder.orderStatus}
+          </p>
+          <p>
+            <strong>Date:</strong>{" "}
+            {new Date(selectedOrder.createdAt).toLocaleDateString()}
+          </p>
+          <p>
+            <strong>Shipping Address:</strong>
+          </p>
+          <p>{selectedOrder.shippingAddress.name}</p>
+          <p>{selectedOrder.shippingAddress.address}</p>
+          <p>
+            {selectedOrder.shippingAddress.city},{" "}
+            {selectedOrder.shippingAddress.state}
+          </p>
+          <p>
+            {selectedOrder.shippingAddress.country} -{" "}
+            {selectedOrder.shippingAddress.postalCode}
+          </p>
+          <p>
+            <strong>Order Items:</strong>
+          </p>
+          <ul>
+            {selectedOrder.orderItems.map((item, index) => (
+              <li key={index}>
+                {item.book.title} by {item.book.author} - Quantity:{" "}
+                {item.quantity}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </Dialog>
+  );
 
   return (
-    <div className="p-5 m-3">
-      <div
-        className="d-flex flex-wrap"
-        style={{ justifyContent: "space-between" }}
-      >
+    <div className="mt-3">
+      <div className="d-flex flex-wrap" style={{ justifyContent: "start" }}>
         <div>
-          <h3 className="text-start mb-3">Orders Management</h3>
+          {/* <h3 className="text-start mb-3">Orders Management</h3> */}
         </div>
 
         {/* Search Bar */}
-        <div className="mb-3 flex justify-content-between">
+        <div className="mb-3 ms-3 ">
           <InputText
             placeholder="Search by Order ID or Email"
             value={search}
@@ -204,12 +333,29 @@ const OrderTable = () => {
         responsiveLayout="scroll"
         emptyMessage="No orders found."
       >
-        <Column field="orderId" header="Order ID" sortable />
-        <Column field="user.email" header="Customer Email" sortable />
-        <Column field="orderTotal" header="Total Amount" sortable />
+        <Column
+          field="orderId"
+          header="Order ID"
+          sortable
+          headerStyle={{ fontSize: "12px" }}
+        />
+        <Column
+          field="user.email"
+          header="Customer Email"
+          headerStyle={{ fontSize: "12px" }}
+          sortable
+        />
+        <Column
+          field="orderTotal"
+          header="Total Amount"
+          headerStyle={{ fontSize: "12px" }}
+          body={(rowData) => <span> ₹ {rowData.orderTotal}</span>}
+          sortable
+        />
         <Column
           field="paymentStatus"
           header="Payment Status"
+          headerStyle={{ fontSize: "12px" }}
           sortable
           body={paymentTemplate}
         />
@@ -217,16 +363,30 @@ const OrderTable = () => {
           field="orderStatus"
           header="Order Status"
           sortable
+          headerStyle={{ fontSize: "12px" }}
           body={statusTemplate}
         />
         <Column
           field="createdAt"
           header="Date"
+          headerStyle={{ fontSize: "12px" }}
           sortable
           body={(rowData) => new Date(rowData.createdAt).toLocaleDateString()}
         />
-        {/* <Column header="Actions" body={actionTemplate} /> */}
+        <Column
+          header="Actions"
+          body={actionTemplate}
+          headerStyle={{ fontSize: "12px" }}
+        />
+        <Column
+          header="Invoice"
+          body={actionTemplates}
+          headerStyle={{ fontSize: "12px" }}
+        />
       </DataTable>
+
+      {/* Order Details Modal */}
+      {orderDetailsModal()}
     </div>
   );
 };
