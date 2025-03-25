@@ -11,7 +11,7 @@ export default function QuotePage() {
   const [quotes, setQuotes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [formData, setFormData] = useState({ quote: "", author: "", date: "" });
+  const [formData, setFormData] = useState({ quote: "", author: "" });
   const [editMode, setEditMode] = useState(false);
   const [selectedQuote, setSelectedQuote] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -192,7 +192,7 @@ export default function QuotePage() {
                   required
                 />
               </div>
-              <div className="quote-form-group">
+              {/* <div className="quote-form-group">
                 <label>Date:</label>
                 <input
                   type="date"
@@ -202,7 +202,7 @@ export default function QuotePage() {
                   }
                   required
                 />
-              </div>
+              </div> */}
               <div
                 className="d-flex"
                 style={{ justifyContent: "space-between" }}
